@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyServerApp.Pages.Login">
+    <VerticalStackLayout>
+        <Label 
+            Text="Login"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            x:Name="LoginLbl"/>
+            <Entry
+                Placeholder="Username" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="UsernameField"/>
+            <Entry 
+                Placeholder="Password"
+                IsPassword="True" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="PasswordField"/>
+            <Button 
+                Text="Go"
+                x:Name="LoginBtn"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Clicked="AuthenticateUser"/>
+            <Entry
+                Placeholder="First Name" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="FirstNameField" 
+                IsVisible="False"/>
+            <Entry 
+                Placeholder="Last Name"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="LastNameField"
+                IsVisible="False"/>
+            <Entry
+                Placeholder="Username" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="NewUsernameField"
+                IsVisible="False"/>
+            <Entry 
+                Placeholder="Password"
+                IsPassword="True" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" 
+                x:Name="NewPasswordField"
+                IsVisible="False"/>
+            <Button 
+                Text="Sign Up"
+                x:Name="CreateAccBtn"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Clicked="CreateAccount"
+                IsVisible="False"/>
+        <Label 
+            Text="or"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            x:Name="Divider"/>
+        <Button 
+            Text="Create Account"
+            x:Name="ToggleFieldsBtn"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Clicked="ShowFields"/>
+        <Label 
+            Text=""
+            x:Name="Warning" />
+    </VerticalStackLayout>
+</ContentView>

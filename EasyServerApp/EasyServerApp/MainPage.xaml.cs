@@ -1,24 +1,29 @@
-﻿namespace EasyServerApp;
+﻿using EasyServerApp.EasyServerDB;
+using EasyServerApp.Pages;
+using System.Data.SqlTypes;
+
+namespace EasyServerApp;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public EasyServerRepository easyServerRepository { get { return _easyServerRepository; }  }
+    private EasyServerRepository _easyServerRepository;
 
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
-	}
+        CreateAPI();
+		MainFrame.Content = new Login(easyServerRepository);
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private EasyServerRepository CreateAPI()
+    {
+        if (_easyServerRepository == null)
+        {
+            _easyServerRepository = new EasyServerRepository();
+        }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        return _easyServerRepository;
+    }
 }
 
