@@ -5,6 +5,7 @@
     <VerticalStackLayout>
         <Label 
             Text="Login"
+            FontSize="Medium"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             x:Name="LoginLbl"/>

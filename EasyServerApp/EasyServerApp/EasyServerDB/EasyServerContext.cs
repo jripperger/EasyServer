@@ -68,10 +68,17 @@ namespace EasyServerApp.EasyServerDB
 
                 entity.Property(e => e.TableId).HasColumnName("TableID");
 
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
                 entity.Property(e => e.Qrcode)
                     .IsRequired()
                     .HasMaxLength(500)
                     .HasColumnName("QRCode");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.RestaurantTable)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_RestaurantTable_Employee");
             });
 
             OnModelCreatingPartial(modelBuilder);

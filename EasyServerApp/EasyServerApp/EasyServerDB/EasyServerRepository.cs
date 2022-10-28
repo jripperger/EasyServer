@@ -54,7 +54,23 @@ namespace EasyServerApp.EasyServerDB
                 return context.Employee.Where(x => (x.Username == username && x.Password == password)).FirstOrDefault();
             }              
         }
-        
+
+        public Employee GetEmployeeByName(string firstName, string lastName)
+        {
+            using (var context = new EasyServerContext())
+            {
+                return context.Employee.Where(x => (x.FirstName == firstName && x.LastName == lastName)).FirstOrDefault();
+            }
+        }
+
+        public Employee GetEmployeeByUsername(string username)
+        {
+            using (var context = new EasyServerContext())
+            {
+                return context.Employee.Where(x => (x.Username == username)).FirstOrDefault();
+            }
+        }
+
         public void InsertEmployeeRow(string firstName, string lastName, string username, string password, string role = "Server")
         {
             using (var context = new EasyServerContext())
@@ -73,11 +89,44 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
+        public void InsertRestaurantTableRow(string qrCode, int? employeeID)
+        {
+            using (var context = new EasyServerContext())
+            {
+                RestaurantTable newTable = new()
+                {
+                    Qrcode = qrCode,
+                    EmployeeId = employeeID
+                };
+
+                context.RestaurantTable.Add(newTable);
+                context.SaveChanges();
+            }
+        }
+
+
         public RestaurantTable GetTableById(int id)
         {
             using (var context = new EasyServerContext())
             {
                 return context.RestaurantTable.Where(x => (x.TableId == id)).FirstOrDefault();
+            }
+        }
+
+        public void UpdateTableServer(int tableID, int employeeID)
+        {
+            using (var context = new EasyServerContext())
+            {
+                RestaurantTable table = GetTableById(tableID);
+
+                if (table != null)
+                {
+                    
+                    table.EmployeeId = employeeID;
+                    context.RestaurantTable.Update(table);
+                    context.SaveChanges();
+                }
+                
             }
         }
     }

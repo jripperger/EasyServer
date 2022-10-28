@@ -7,7 +7,7 @@
    "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "EasyServerDB",
+   "OutputPath": "temp",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "EasyServerApp",
    "Schemas": null,

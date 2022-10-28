@@ -9,5 +9,8 @@ namespace EasyServerApp.EasyServerDB
     {
         public string Qrcode { get; set; }
         public int TableId { get; set; }
+        public int? EmployeeId { get; set; }
+
+        public virtual Employee Employee { get; set; }
     }
 }

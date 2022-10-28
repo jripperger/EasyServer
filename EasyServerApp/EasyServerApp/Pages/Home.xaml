@@ -4,7 +4,9 @@
              x:Class="EasyServerApp.Pages.Home"
              Title="Home">
     <VerticalStackLayout>
-        <Label x:Name="WelcomeLbl"/>
+        <Label 
+            x:Name="WelcomeLbl"
+            FontSize="Medium"/>
         <Frame Grid.Row="1" x:Name="HomeFrame" VerticalOptions="Center" HorizontalOptions="Center"/>
     </VerticalStackLayout>
     

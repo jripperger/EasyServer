@@ -1,3 +1,11 @@
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.runtimeconfig.json
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.dll
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.pdb
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp.apk
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp.aab
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.aab
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.apk
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.apk.idsig
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\build.props
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\adb.props
@@ -94,17 +102,9 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.AssemblyInfoInputs.cache
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.AssemblyInfo.cs
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\XamlC.stamp
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.pdb
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.runtimeconfig.json
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.dll
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\EasyServerApp.pdb
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp.apk
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp.aab
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.aab
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.apk
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-android\com.companyname.easyserverapp-Signed.apk.idsig
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\XamlC.stamp
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.genruntimeconfig.cache
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\EasyServerApp.runtimeconfig.json.bin
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\bin\com.companyname.easyserverapp.apk
@@ -133,6 +133,7 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\armeabi-v7a\System.Private.Uri.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\armeabi-v7a\System.Xml.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\CloudinaryDotNet.dll
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\DocumentFormat.OpenXml.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\EasyServerApp.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\EasyServerApp.pdb
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\GoogleGson.dll
@@ -236,6 +237,7 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.FileSystem.Watcher.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.IsolatedStorage.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.MemoryMappedFiles.dll
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.Packaging.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.Pipes.AccessControl.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.Pipes.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-android\android\assets\System.IO.UnmanagedMemoryStream.dll

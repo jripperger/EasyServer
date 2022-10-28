@@ -24,7 +24,6 @@ public partial class Home : ContentPage
         role = employee.Role;
         TOD = DateTime.Now;
 
-
         if (TOD.Hour < 12) 
         {
             WelcomeLbl.Text = "Good Morning " + firstName;
@@ -38,6 +37,6 @@ public partial class Home : ContentPage
             WelcomeLbl.Text = "Good Evening " + firstName;
         }
         
-        HomeFrame.Content = new Tables(easyServerRepository);
+        HomeFrame.Content = new Tables(employee, easyServerRepository);
     }
 }
