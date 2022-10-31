@@ -288,3 +288,4 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-ios\iossimulator-x64\EasyServerApp.pdb
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-ios\iossimulator-x64\EasyServerApp.genruntimeconfig.cache
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-ios\iossimulator-x64\ref\EasyServerApp.dll
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net6.0-ios\iossimulator-x64\build-signature\signature

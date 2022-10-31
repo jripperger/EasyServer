@@ -1,4 +1,5 @@
 ﻿using CloudinaryDotNet.Actions;
+using EasyServerApp.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Controls;
 using System;
@@ -127,6 +128,23 @@ namespace EasyServerApp.EasyServerDB
                     context.SaveChanges();
                 }
                 
+            }
+        }
+
+        public void UpdateEmployeeRole(int employeeID, string role)
+        {
+            using (var context = new EasyServerContext())
+            {
+                Employee employee = GetEmployeeById(employeeID);
+
+                if (employee != null)
+                {
+
+                    employee.Role = role;
+                    context.Employee.Update(employee);
+                    context.SaveChanges();
+                }
+
             }
         }
     }

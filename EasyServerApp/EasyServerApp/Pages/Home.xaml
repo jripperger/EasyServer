@@ -4,9 +4,63 @@
              x:Class="EasyServerApp.Pages.Home"
              Title="Home">
     <VerticalStackLayout>
-        <Label 
-            x:Name="WelcomeLbl"
-            FontSize="Medium"/>
+        <Grid 
+            x:Name="HomeGrid"
+            WidthRequest="900"
+            HorizontalOptions="Start"
+            Margin="10, 20, 0, 20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label 
+                x:Name="WelcomeLbl"
+                Grid.Row="1"
+                Grid.Column="0"
+                FontSize="Medium"/>
+            <Button
+                x:Name="ToTablesBtn"
+                Text="Tables"
+                Grid.Row="1"
+                Grid.Column="2"
+                WidthRequest="100"
+                HeightRequest="40"
+                Clicked="NavigateToTables"/>
+            <Button
+                x:Name="ToEmployeesBtn"
+                Text="Employees"
+                Grid.Row="1"
+                Grid.Column="4"
+                WidthRequest="100"
+                HeightRequest="40"
+                Clicked="NavigateToEmployees"/>
+            <Button
+                x:Name="ToQueueBtn"
+                Text="Queue"
+                Grid.Row="1"
+                Grid.Column="3"
+                WidthRequest="100"
+                HeightRequest="40"
+                Clicked="NavigateToQueue"/>
+            <Button
+                x:Name="SignOutBtn"
+                Text="Sign Out"
+                Grid.Row="1"
+                Grid.Column="1"
+                WidthRequest="100"
+                HeightRequest="40"
+                Clicked="SignOut"/>
+        </Grid>
+
         <Frame Grid.Row="1" x:Name="HomeFrame" VerticalOptions="Center" HorizontalOptions="Center"/>
     </VerticalStackLayout>
     

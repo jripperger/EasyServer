@@ -38,6 +38,8 @@ public partial class Tables : ContentView
         role = employee.Role;
         isManager = CheckUser();
 
+        if (isManager) SaveBtn.IsVisible = false;
+
         pickers = new List<Picker>();
         restaurantTables = easyServerRepository.GetTableList();
 
@@ -58,8 +60,7 @@ public partial class Tables : ContentView
 
     private void GenerateGridContents()
     {
-        List<Employee> employees;
-        employees = easyServerRepository.GetEmployeeList();
+        List<Employee> employees = easyServerRepository.GetEmployeeList();
 
         GenerateGridLayout();
 
@@ -91,18 +92,17 @@ public partial class Tables : ContentView
             TablesGrid.SetRow(label, rowIndex);
             TablesGrid.SetColumn(label, columnIndex);
 
-            var picker = new Picker();
-            picker.Title = "Choose an employee: ";
-            
-            for (int x = 0; x < employees.Count; x++)
-            {
-                picker.Items.Add(employees[x].FirstName.Trim() + " " + employees[x].LastName.Trim() + " [" + employees[x].EmployeeId + "]");
-            }
-
-            pickers.Add(picker);
-
             if (isManager)
             {
+                var picker = new Picker();
+                picker.Title = "Choose an employee: ";
+
+                for (int x = 0; x < employees.Count; x++)
+                {
+                    picker.Items.Add(employees[x].FirstName.Trim() + " " + employees[x].LastName.Trim() + " [" + employees[x].EmployeeId + "]");
+                }
+
+                pickers.Add(picker);
                 TablesGrid.Add(picker);
                 TablesGrid.SetRow(picker, rowIndex + 1);
                 TablesGrid.SetColumn(picker, columnIndex);
@@ -113,7 +113,9 @@ public partial class Tables : ContentView
             if (columnIndex == columnCount)
             {
                 columnIndex = 0;
-                rowIndex += 2;
+
+                if (isManager) rowIndex += 2;
+                else rowIndex += 1;
             }
         }
     }
@@ -126,17 +128,22 @@ public partial class Tables : ContentView
             TablesGrid.AddColumnDefinition(columnDefinition);
         }
 
-        int rows = ((int)Math.Ceiling((double)restaurantTables.Count / TablesGrid.ColumnDefinitions.Count) * 2);
+        int rows = (int)Math.Ceiling((double)restaurantTables.Count / TablesGrid.ColumnDefinitions.Count);
+        if (isManager) rows *= 2;
 
         for (int i = 0; i < rows; i++)
         {
             RowDefinition rowDefinition = new();
             TablesGrid.AddRowDefinition(rowDefinition);
 
-            if (i % 2 != 0)
+            if (isManager)
             {
-                TablesGrid.RowDefinitions[i].Height = 100;
-            }         
+                if (i % 2 != 0)
+                {
+                    TablesGrid.RowDefinitions[i].Height = 100;
+                }
+            }
+            else TablesGrid.RowDefinitions[i].Height = 50;
         }
     }
 
@@ -156,8 +163,13 @@ public partial class Tables : ContentView
 
                 Employee employee = easyServerRepository.GetEmployeeByName(firstName, lastName);
 
-                easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
-            }
+                if (restaurantTables[i].EmployeeId != employee.EmployeeId)
+                {
+                    easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
+                }
+
+                pickers[i].SelectedItem = null;
+            }        
         }
     }
 }
