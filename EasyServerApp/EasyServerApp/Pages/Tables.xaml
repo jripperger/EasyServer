@@ -17,6 +17,7 @@
         <Button
             Text="Save Configuration"
             VerticalOptions="Center"
+            HorizontalOptions="Center"
             x:Name="SaveBtn"
             Clicked="SaveServers"
             WidthRequest="500"/>

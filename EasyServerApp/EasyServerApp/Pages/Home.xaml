@@ -61,6 +61,13 @@
                 Clicked="SignOut"/>
         </Grid>
 
+        <Button
+            x:Name="ViewQueueBtn"
+            Text="View Queue"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Clicked="ViewQueue"/>
+
         <Frame Grid.Row="1" x:Name="HomeFrame" VerticalOptions="Center" HorizontalOptions="Center"/>
     </VerticalStackLayout>
     

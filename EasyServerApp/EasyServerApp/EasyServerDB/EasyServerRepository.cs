@@ -72,6 +72,14 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
+        public Employee GetEmployeeByPassword(string password)
+        {
+            using (var context = new EasyServerContext())
+            {
+                return context.Employee.Where(x => (x.Password == password)).FirstOrDefault();
+            }
+        }
+
         public void InsertEmployeeRow(string firstName, string lastName, string username, string password, string role = "Server")
         {
             using (var context = new EasyServerContext())

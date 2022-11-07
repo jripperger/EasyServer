@@ -72,6 +72,9 @@
 	  <MauiXaml Update="Pages\Queue.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\RequestService.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Tables.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

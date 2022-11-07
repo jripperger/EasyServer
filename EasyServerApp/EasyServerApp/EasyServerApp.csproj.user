@@ -31,6 +31,9 @@
     <MauiXaml Update="Pages\Queue.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Pages\RequestService.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\Tables.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

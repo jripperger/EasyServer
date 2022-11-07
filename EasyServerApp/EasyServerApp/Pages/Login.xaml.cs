@@ -35,24 +35,51 @@ public partial class Login : ContentView
                     Password = employee.Password.Trim(),
                     Role = employee.Role.Trim()
                 };
-                
-                ContentPage home = new Home(formattedEmployee, easyServerRepository);
-                await Navigation.PushAsync(home);
+
+                if (TableIDField.IsVisible == true)
+                {
+                    if (formattedEmployee.Role == "Manager")
+                    {
+                        int tableID = int.Parse(TableIDField.Text.Trim());
+                        RestaurantTable table = easyServerRepository.GetTableById(tableID);
+
+                        if (table != null)
+                        {
+                            RequestService requestService = new(table, easyServerRepository);
+                            ContentPage home = new Home(formattedEmployee, null, requestService, easyServerRepository);
+                            await Navigation.PushAsync(home);
+                        }
+                        else
+                        {
+                            Warning.Text = "Table not found";
+                        }
+                    }
+                    else
+                    {
+                        Warning.Text = "You must be a manager for table login";
+                    }
+                }
+                else
+                {
+                    Tables tables = new(employee, easyServerRepository);
+                    ContentPage home = new Home(formattedEmployee, tables, null, easyServerRepository);
+                    await Navigation.PushAsync(home);
+                }
             }
             else
             {
                 Warning.Text = "Account not found";
             }
-
-            UsernameField.Text = "";
-            PasswordField.Text = "";
-            Warning.Text = "";
         }
+
+        UsernameField.Text = "";
+        PasswordField.Text = "";
+        TableIDField.Text = "";
     }
 
-    private void ShowFields(object sender, System.EventArgs e)
+    private void ToggleFields(object sender, System.EventArgs e)
     {
-        if (FirstNameField.IsVisible == false)
+        if (FirstNameField.IsVisible == false && TableIDField.IsVisible == false)
         {
             LoginLbl.Text = "Create an Account";
             FirstNameField.IsVisible = true;
@@ -61,10 +88,12 @@ public partial class Login : ContentView
             NewPasswordField.IsVisible = true;
             CreateAccBtn.IsVisible = true;
 
-            ToggleFieldsBtn.Text = "Login";
+            ToggleFieldsBtn.Text = "Login to your Account";
             UsernameField.IsVisible = false;
             PasswordField.IsVisible = false;
             LoginBtn.IsVisible = false;
+
+            TableIDField.IsVisible = false;
         }
         else
         {
@@ -79,9 +108,52 @@ public partial class Login : ContentView
             UsernameField.IsVisible = true;
             PasswordField.IsVisible = true;
             LoginBtn.IsVisible = true;
-        }
-        
 
+            TableIDField.IsVisible = false;
+        }
+
+        FirstNameField.Text = "";
+        LastNameField.Text = "";
+        UsernameField.Text = "";
+        PasswordField.Text = "";
+        NewUsernameField.Text = "";
+        NewPasswordField.Text = "";
+
+        Warning.Text = "";
+    }
+
+    private void ToggleTableFields(object sender, System.EventArgs e)
+    {
+        if (TableIDField.IsVisible == false)
+        {
+            LoginLbl.Text = "Table Login";
+            TableIDField.IsVisible = true; 
+            ToggleFieldsBtn.Text = "Login to your Account";
+        }
+        else
+        {
+            LoginLbl.Text = "Login";
+            TableIDField.IsVisible = false;
+            ToggleFieldsBtn.Text = "Create an Account";
+        }
+
+        UsernameField.IsVisible = true;
+        PasswordField.IsVisible = true;
+
+        FirstNameField.IsVisible = false;
+        LastNameField.IsVisible = false;
+        NewUsernameField.IsVisible = false;
+        NewPasswordField.IsVisible = false;
+        CreateAccBtn.IsVisible = false;
+
+        FirstNameField.Text = "";
+        LastNameField.Text = "";
+        UsernameField.Text = "";
+        PasswordField.Text = "";
+        NewUsernameField.Text = "";
+        NewPasswordField.Text = "";
+
+        Warning.Text = "";
     }
 
     private async void CreateAccount(object sender, System.EventArgs e)
@@ -110,7 +182,9 @@ public partial class Login : ContentView
         else
         {
             easyServerRepository.InsertEmployeeRow(firstName, lastName, username, password);
-            ContentPage home = new Home(newEmployee, easyServerRepository);
+
+            Tables tables = new(newEmployee, easyServerRepository);
+            ContentPage home = new Home(newEmployee, tables, null, easyServerRepository);
             await Navigation.PushAsync(home);
 
             FirstNameField.Text = "";

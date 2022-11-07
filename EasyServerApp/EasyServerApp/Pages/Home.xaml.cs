@@ -1,4 +1,3 @@
-using DocumentFormat.OpenXml.Wordprocessing;
 using EasyServerApp.EasyServerDB;
 
 namespace EasyServerApp.Pages;
@@ -6,22 +5,24 @@ namespace EasyServerApp.Pages;
 public partial class Home : ContentPage
 {
     private Employee employee;
-    private int id;
+    private int employeeID;
     private string firstName;
     private string lastName;
     private string username;
     private string password;
     private string role;
+    private int tableID;
+    private bool isTables;
     private EasyServerRepository easyServerRepository;
     private DateTime TOD;
 
-    public Home(Employee employee, EasyServerRepository easyServerRepository)
+    public Home(Employee employee, Tables tables, RequestService requestService, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
 
         this.employee = employee;
         this.easyServerRepository = easyServerRepository;
-        id = employee.EmployeeId;
+        employeeID = employee.EmployeeId;
         firstName = employee.FirstName;
         lastName = employee.LastName;
         username = employee.Username;
@@ -37,10 +38,31 @@ public partial class Home : ContentPage
         {
             ToEmployeesBtn.IsVisible = false;
         }
-
-        DisplayGreeting();
         
-        HomeFrame.Content = new Tables(employee, easyServerRepository);
+        if (requestService != null)
+        {
+            HomeFrame.Content = requestService;
+            DisplayCustomerGreeting();
+
+            ViewQueueBtn.IsVisible = true;
+            ToTablesBtn.IsVisible = false;
+            ToQueueBtn.IsVisible = false;
+            ToEmployeesBtn.IsVisible = false;
+
+            isTables = false;
+        }
+        else
+        {
+            HomeFrame.Content = tables;
+            DisplayEmployeeGreeting();
+
+            ViewQueueBtn.IsVisible = false;
+            ToTablesBtn.IsVisible = true;
+            ToQueueBtn.IsVisible = true;
+            ToEmployeesBtn.IsVisible = true;
+
+            isTables = true;
+        }
     }
 
     private void NavigateToTables(object sender, System.EventArgs e)
@@ -60,10 +82,28 @@ public partial class Home : ContentPage
 
     private async void SignOut(object sender, System.EventArgs e)
     {
-        await Navigation.PopToRootAsync();
+        if (isTables)
+        {
+            await Navigation.PopToRootAsync();
+        } 
+        else
+        {
+            string password = await DisplayPromptAsync("Table Sign Out", "Enter manager password:");
+            Employee employee = easyServerRepository.GetEmployeeByPassword(password);
+
+            if (employee.Role.Trim() == "Manager")
+            {
+                await Navigation.PopToRootAsync();
+            }
+            else
+            {
+                await DisplayAlert("Logout Failed", "Incorrect password", "OK");
+            }
+        }
+        
     }
 
-    private void DisplayGreeting()
+    private void DisplayEmployeeGreeting()
     {
         if (TOD.Hour < 12)
         {
@@ -77,5 +117,26 @@ public partial class Home : ContentPage
         {
             WelcomeLbl.Text = "Good Evening " + firstName;
         }
+    }
+
+    private void DisplayCustomerGreeting()
+    {
+        if (TOD.Hour < 12)
+        {
+            WelcomeLbl.Text = "Good Morning";
+        }
+        else if (TOD.Hour >= 12 && TOD.Hour < 18)
+        {
+            WelcomeLbl.Text = "Good Afternoon";
+        }
+        else
+        {
+            WelcomeLbl.Text = "Good Evening";
+        }
+    }
+
+    private void ViewQueue(object sender, System.EventArgs e)
+    {
+        HomeFrame.Content = new Queue(employee, easyServerRepository);
     }
 }

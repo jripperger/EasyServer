@@ -38,7 +38,14 @@ public partial class Tables : ContentView
         role = employee.Role;
         isManager = CheckUser();
 
-        if (isManager) SaveBtn.IsVisible = false;
+        if (isManager)
+        {
+            SaveBtn.IsVisible = true;
+        }
+        else
+        {
+            SaveBtn.IsVisible = false;
+        }
 
         pickers = new List<Picker>();
         restaurantTables = easyServerRepository.GetTableList();

@@ -51,6 +51,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Queue.
 build_metadata.AdditionalFiles.TargetPath = Pages\Queue.xaml
 build_metadata.AdditionalFiles.RelativePath = Pages\Queue.xaml
 
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/RequestService.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.RequestService.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\RequestService.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\RequestService.xaml
+
 [C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Tables.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Tables.xaml
