@@ -45,9 +45,16 @@ public partial class Login : ContentView
 
                         if (table != null)
                         {
-                            RequestService requestService = new(table, easyServerRepository);
-                            ContentPage home = new Home(formattedEmployee, null, requestService, easyServerRepository);
-                            await Navigation.PushAsync(home);
+                            if (table.EmployeeId.HasValue)
+                            {
+                                RequestService requestService = new(table, easyServerRepository);
+                                ContentPage home = new Home(formattedEmployee, null, requestService, easyServerRepository);
+                                await Navigation.PushAsync(home);
+                            }
+                            else
+                            {
+                                Warning.Text = "No server is working the requested table";
+                            }
                         }
                         else
                         {
@@ -77,40 +84,51 @@ public partial class Login : ContentView
         TableIDField.Text = "";
     }
 
-    private void ToggleFields(object sender, System.EventArgs e)
+    private void ToggleLgnAccFields(object sender, System.EventArgs e)
     {
-        if (FirstNameField.IsVisible == false && TableIDField.IsVisible == false)
-        {
-            LoginLbl.Text = "Create an Account";
-            FirstNameField.IsVisible = true;
-            LastNameField.IsVisible = true;
-            NewUsernameField.IsVisible = true;
-            NewPasswordField.IsVisible = true;
-            CreateAccBtn.IsVisible = true;
+        LoginLbl.Text = "Login to your Account";
+        FirstNameField.IsVisible = false;
+        LastNameField.IsVisible = false;
+        NewUsernameField.IsVisible = false;
+        NewPasswordField.IsVisible = false;
+        CreateAccBtn.IsVisible = false;
+        LgnAccFieldsBtn.IsVisible = false;
 
-            ToggleFieldsBtn.Text = "Login to your Account";
-            UsernameField.IsVisible = false;
-            PasswordField.IsVisible = false;
-            LoginBtn.IsVisible = false;
+        CrtAccFieldsBtn.IsVisible = true;
+        UsernameField.IsVisible = true;
+        PasswordField.IsVisible = true;
+        LoginBtn.IsVisible = true;
 
-            TableIDField.IsVisible = false;
-        }
-        else
-        {
-            LoginLbl.Text = "Login";
-            FirstNameField.IsVisible = false;
-            LastNameField.IsVisible = false;
-            NewUsernameField.IsVisible = false;
-            NewPasswordField.IsVisible = false;
-            CreateAccBtn.IsVisible = false;
+        TableIDField.IsVisible = false;
+        Divider2.IsVisible = false;
 
-            ToggleFieldsBtn.Text = "Create an Account";
-            UsernameField.IsVisible = true;
-            PasswordField.IsVisible = true;
-            LoginBtn.IsVisible = true;
+        FirstNameField.Text = "";
+        LastNameField.Text = "";
+        UsernameField.Text = "";
+        PasswordField.Text = "";
+        NewUsernameField.Text = "";
+        NewPasswordField.Text = "";
 
-            TableIDField.IsVisible = false;
-        }
+        Warning.Text = "";
+    }
+
+    private void ToggleCrtAccFields(object sender, System.EventArgs e)
+    {
+        LoginLbl.Text = "Create an Account";
+        FirstNameField.IsVisible = true;
+        LastNameField.IsVisible = true;
+        NewUsernameField.IsVisible = true;
+        NewPasswordField.IsVisible = true;
+        CreateAccBtn.IsVisible = true;
+        LgnAccFieldsBtn.IsVisible = true;
+
+        CrtAccFieldsBtn.IsVisible = false;
+        UsernameField.IsVisible = false;
+        PasswordField.IsVisible = false;
+        LoginBtn.IsVisible = false;
+
+        TableIDField.IsVisible = false;
+        Divider2.IsVisible = false;
 
         FirstNameField.Text = "";
         LastNameField.Text = "";
@@ -124,19 +142,12 @@ public partial class Login : ContentView
 
     private void ToggleTableFields(object sender, System.EventArgs e)
     {
-        if (TableIDField.IsVisible == false)
-        {
-            LoginLbl.Text = "Table Login";
-            TableIDField.IsVisible = true; 
-            ToggleFieldsBtn.Text = "Login to your Account";
-        }
-        else
-        {
-            LoginLbl.Text = "Login";
-            TableIDField.IsVisible = false;
-            ToggleFieldsBtn.Text = "Create an Account";
-        }
+        LoginLbl.Text = "Login to a Table";
 
+        TableIDField.IsVisible = true;
+        LgnAccFieldsBtn.IsVisible = true;
+        CrtAccFieldsBtn.IsVisible = true;
+        Divider2.IsVisible = true;
         UsernameField.IsVisible = true;
         PasswordField.IsVisible = true;
 
@@ -199,8 +210,8 @@ public partial class Login : ContentView
             NewUsernameField.IsVisible = false;
             NewPasswordField.IsVisible = false;
             CreateAccBtn.IsVisible = false;
+            LgnAccFieldsBtn.IsVisible = false;
 
-            ToggleFieldsBtn.Text = "Create an Account";
             UsernameField.IsVisible = true;
             PasswordField.IsVisible = true;
             LoginBtn.IsVisible = true;

@@ -11,7 +11,7 @@ public partial class Home : ContentPage
     private string username;
     private string password;
     private string role;
-    private int tableID;
+    private RestaurantTable table;
     private bool isTables;
     private EasyServerRepository easyServerRepository;
     private DateTime TOD;
@@ -34,15 +34,13 @@ public partial class Home : ContentPage
         {
             ToEmployeesBtn.IsVisible = true;
         }
-        else
-        {
-            ToEmployeesBtn.IsVisible = false;
-        }
         
         if (requestService != null)
         {
             HomeFrame.Content = requestService;
             DisplayCustomerGreeting();
+
+            table = requestService.Table;
 
             ViewQueueBtn.IsVisible = true;
             ToTablesBtn.IsVisible = false;
@@ -59,7 +57,6 @@ public partial class Home : ContentPage
             ViewQueueBtn.IsVisible = false;
             ToTablesBtn.IsVisible = true;
             ToQueueBtn.IsVisible = true;
-            ToEmployeesBtn.IsVisible = true;
 
             isTables = true;
         }
@@ -137,6 +134,17 @@ public partial class Home : ContentPage
 
     private void ViewQueue(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Queue(employee, easyServerRepository);
+        Employee tblServer = easyServerRepository.GetEmployeeById((int)table.EmployeeId);
+
+        Employee formattedTBLServer = new()
+        {
+            FirstName = tblServer.FirstName.Trim(),
+            LastName = tblServer.LastName.Trim(),
+            Username = tblServer.Username.Trim(),
+            Password = tblServer.Password.Trim(),
+            Role = tblServer.Role.Trim()
+        };
+
+        HomeFrame.Content = new Queue(formattedTBLServer, easyServerRepository);
     }
 }

@@ -6,33 +6,37 @@ namespace EasyServerApp.Pages;
 public partial class RequestService : ContentView
 {
     EasyServerRepository easyServerRepository;
-    private List<Employee> employees;
+    private RestaurantTable table;
+    private Employee employee;
     private int tableID;
-    private int? employeeID;
+
+    public int TableID { get { return tableID; } }
+    public RestaurantTable Table { get { return table; } }
 
     public RequestService(RestaurantTable table, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
         this.easyServerRepository = easyServerRepository;
-        employees = easyServerRepository.GetEmployeeList();
+        this.table = table;
         tableID = table.TableId;
-        employeeID = table.EmployeeId;
 
-        //GeneratePicker();
+        employee = easyServerRepository.GetEmployeeById(table.TableId);
+
+        TableLbl.Text = "Table " + table.TableId.ToString();
     }
 
-    /*private void GeneratePicker()
+    private void RequestServer(object sender, System.EventArgs e)
     {
-        for (int i = 0; i < employees.Count; i++)
+        if (ReqServerBtn.Text == "Request Server")
         {
-            var picker = new Picker();
-            picker.Title = "Choose an employee's queue to view: ";
-
-            picker.Items.Add(employees[i].FirstName.Trim() + " " + employees[i].LastName.Trim() + " [" + employees[i].EmployeeId + "]");
-
-            RequestServiceGrid.Add(picker);
-            RequestServiceGrid.SetRow(picker, 2);
-        }
-    }*/
+            employee.Queue.Add(table);
+            ReqServerBtn.Text = "Cancel Server Request";
+        } 
+        else
+        {
+            employee.Queue.Remove(table);
+            ReqServerBtn.Text = "Request Server";
+        } 
+    }
 }

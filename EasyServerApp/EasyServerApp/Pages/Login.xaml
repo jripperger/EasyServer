@@ -4,7 +4,7 @@
              x:Class="EasyServerApp.Pages.Login">
     <VerticalStackLayout>
         <Label 
-            Text="Login"
+            Text="Login to your Account"
             FontSize="Medium"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
@@ -68,13 +68,26 @@
             Text="or"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            x:Name="Divider"/>
+            x:Name="Divider1"/>
         <Button 
             Text="Create Account"
-            x:Name="ToggleFieldsBtn"
+            x:Name="CrtAccFieldsBtn"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            Clicked="ToggleFields"/>
+            Clicked="ToggleCrtAccFields"/>
+        <Label 
+            Text="or"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            IsVisible="false"
+            x:Name="Divider2"/>
+        <Button 
+            Text="Login to your Account"
+            x:Name="LgnAccFieldsBtn"
+            IsVisible="false"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Clicked="ToggleLgnAccFields"/>
         <Label 
             Text=""
             x:Name="Warning" />
