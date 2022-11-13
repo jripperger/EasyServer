@@ -64,13 +64,13 @@
                 VerticalOptions="Center"
                 Clicked="NavigateToEmployees"/>
             <Button
-                x:Name="ViewQueueBtn"
+                x:Name="ToggleViewBtn"
                 Grid.Row="1"
                 Grid.Column="5"
                 Text="View Queue"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                Clicked="ViewQueue"/>
+                Clicked="ToggleView"/>
         </Grid>
      
         <Frame Grid.Row="1" x:Name="HomeFrame" VerticalOptions="Center" HorizontalOptions="Center"/>

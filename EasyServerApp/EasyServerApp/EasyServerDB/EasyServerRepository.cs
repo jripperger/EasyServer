@@ -3,6 +3,7 @@ using EasyServerApp.Pages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Maui.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +14,36 @@ namespace EasyServerApp.EasyServerDB
     public sealed class EasyServerRepository
     {
         private List<Employee> employees;
+        public List<Employee> Employees { get { return employees; } }
+        
         private List<RestaurantTable> tables;
+        public List<RestaurantTable> RestaurantTables { get { return tables; } }
+
+        private Hashtable serverQueues;
+        public Hashtable ServerQueues { get { return serverQueues; } }
 
         public EasyServerRepository()
         {
-            using (var context = new EasyServerContext())
+            employees = GetEmployeeList();
+            tables = GetTableList();
+            serverQueues = new Hashtable();
+
+            for (int i = 0; i < employees.Count; i++)
             {
-                employees = GetEmployeeList();
-                tables = GetTableList();
+                List<RestaurantTable> queue = new();
+                serverQueues.Add(employees[i].EmployeeId, queue);
+            }
+        }
+
+        public List<RestaurantTable> GetServerQueue(int id)
+        {
+            if (serverQueues.ContainsKey(id)) 
+            {
+                return (List<RestaurantTable>)serverQueues[id];
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -134,8 +157,7 @@ namespace EasyServerApp.EasyServerDB
                     table.EmployeeId = employeeID;
                     context.RestaurantTable.Update(table);
                     context.SaveChanges();
-                }
-                
+                }             
             }
         }
 

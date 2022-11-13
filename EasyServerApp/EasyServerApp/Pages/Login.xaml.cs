@@ -1,14 +1,21 @@
 using CloudinaryDotNet.Actions;
 using EasyServerApp.EasyServerDB;
+using System.Collections;
 
 namespace EasyServerApp.Pages;
 
 public partial class Login : ContentView
 {
     private readonly EasyServerRepository easyServerRepository;
-    public Login(EasyServerRepository easyServerRepository)
+    private Hashtable queuePages;
+    private Hashtable requestServicePages;
+
+    public Login(Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
+
+        this.queuePages = queuePages;
+        this.requestServicePages = requestServicePages;
         this.easyServerRepository = easyServerRepository;
     }
 
@@ -33,7 +40,8 @@ public partial class Login : ContentView
                     LastName = employee.LastName.Trim(),
                     Username = employee.Username.Trim(),
                     Password = employee.Password.Trim(),
-                    Role = employee.Role.Trim()
+                    Role = employee.Role.Trim(),
+                    EmployeeId = employee.EmployeeId
                 };
 
                 if (TableIDField.IsVisible == true)
@@ -47,8 +55,10 @@ public partial class Login : ContentView
                         {
                             if (table.EmployeeId.HasValue)
                             {
-                                RequestService requestService = new(table, easyServerRepository);
-                                ContentPage home = new Home(formattedEmployee, null, requestService, easyServerRepository);
+                                RequestService requestServicePage = GetRequestServicePage(tableID);
+                                Queue queuePage = GetQueuePage((int)table.EmployeeId);
+
+                                ContentPage home = new Home(formattedEmployee, null, requestServicePage, queuePage, easyServerRepository);
                                 await Navigation.PushAsync(home);
                             }
                             else
@@ -68,8 +78,10 @@ public partial class Login : ContentView
                 }
                 else
                 {
-                    Tables tables = new(employee, easyServerRepository);
-                    ContentPage home = new Home(formattedEmployee, tables, null, easyServerRepository);
+                    Tables tablesPage = new(formattedEmployee, queuePages, requestServicePages, easyServerRepository);
+                    Queue queuePage = GetQueuePage(formattedEmployee.EmployeeId);
+
+                    ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePage, easyServerRepository);
                     await Navigation.PushAsync(home);
                 }
             }
@@ -82,9 +94,16 @@ public partial class Login : ContentView
         UsernameField.Text = "";
         PasswordField.Text = "";
         TableIDField.Text = "";
+
+        GetLgnAccFields();
     }
 
     private void ToggleLgnAccFields(object sender, System.EventArgs e)
+    {
+        GetLgnAccFields();
+    }
+
+    private void GetLgnAccFields()
     {
         LoginLbl.Text = "Login to your Account";
         FirstNameField.IsVisible = false;
@@ -194,8 +213,19 @@ public partial class Login : ContentView
         {
             easyServerRepository.InsertEmployeeRow(firstName, lastName, username, password);
 
-            Tables tables = new(newEmployee, easyServerRepository);
-            ContentPage home = new Home(newEmployee, tables, null, easyServerRepository);
+            
+
+            // Create a new queue for the employee in the repository
+            List<RestaurantTable> queue = new();
+            easyServerRepository.ServerQueues.Add(newEmployee.EmployeeId, queue);
+
+            // Create a new queue page for the employee
+            Queue queuePage = new(newEmployee, queue, requestServicePages, easyServerRepository);
+            queuePages.Add(newEmployee.EmployeeId, queuePage);
+
+            Tables tables = new(newEmployee, queuePages, requestServicePages, easyServerRepository);
+
+            ContentPage home = new Home(newEmployee, tables, null, queuePage, easyServerRepository);
             await Navigation.PushAsync(home);
 
             FirstNameField.Text = "";
@@ -216,5 +246,15 @@ public partial class Login : ContentView
             PasswordField.IsVisible = true;
             LoginBtn.IsVisible = true;
         }
+    }
+
+    private RequestService GetRequestServicePage(int id)
+    {
+        return (RequestService)requestServicePages[id];
+    }
+
+    private Queue GetQueuePage(int id)
+    {
+        return (Queue)queuePages[id];
     }
 }

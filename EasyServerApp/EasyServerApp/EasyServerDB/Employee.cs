@@ -19,8 +19,6 @@ namespace EasyServerApp.EasyServerDB
         public string Role { get; set; }
         public int EmployeeId { get; set; }
 
-        public List<RestaurantTable> Queue { get; set; }
-
         public virtual ICollection<RestaurantTable> RestaurantTable { get; set; }
     }
 }

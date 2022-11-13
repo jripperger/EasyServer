@@ -1,6 +1,7 @@
 using CloudinaryDotNet.Actions;
 using EasyServerApp.EasyServerDB;
 using Microsoft.Maui.Controls;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
@@ -12,30 +13,25 @@ public partial class Tables : ContentView
     private EasyServerRepository easyServerRepository;
     
     private Employee employee;
-    private int id;
-    private string firstName;
-    private string lastName;
-    private string username;
-    private string password;
-    private string role;
     private bool isManager;
 
     private List<Picker> pickers;
+    private List<Label> labels;
+
     private List<RestaurantTable> restaurantTables;
 
-    public Tables(Employee employee, EasyServerRepository easyServerRepository)
+    private Hashtable queuePages;
+    private Hashtable requestServicePages;
+
+    public Tables(Employee employee, Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
+        this.queuePages = queuePages;
+        this.requestServicePages = requestServicePages;
         this.easyServerRepository = easyServerRepository;
 
         this.employee = employee;
-        id = employee.EmployeeId;
-        firstName = employee.FirstName;
-        lastName = employee.LastName;
-        username = employee.Username;
-        password = employee.Password;
-        role = employee.Role;
         isManager = CheckUser();
 
         if (isManager)
@@ -47,7 +43,9 @@ public partial class Tables : ContentView
             SaveBtn.IsVisible = false;
         }
 
+        labels = new List<Label>();
         pickers = new List<Picker>();
+
         restaurantTables = easyServerRepository.GetTableList();
 
         GenerateGridContents();
@@ -55,7 +53,7 @@ public partial class Tables : ContentView
 
 	private bool CheckUser()
 	{
-        if (role == "Manager")
+        if (employee.Role == "Manager")
         {
             return true;
         }
@@ -95,6 +93,7 @@ public partial class Tables : ContentView
                 label.Text = "Table " + (i + 1) + ": Not assigned";
             }
             
+            labels.Add(label);
             TablesGrid.Add(label);
             TablesGrid.SetRow(label, rowIndex);
             TablesGrid.SetColumn(label, columnIndex);
@@ -172,7 +171,9 @@ public partial class Tables : ContentView
 
                 if (restaurantTables[i].EmployeeId != employee.EmployeeId)
                 {
+                    ((RequestService)requestServicePages[restaurantTables[i].TableId]).QueuePage = (Queue)queuePages[employee.EmployeeId];
                     easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
+                    labels[i].Text = restaurantTables[i].TableId + ": " + employeeName;
                 }
 
                 pickers[i].SelectedItem = null;
