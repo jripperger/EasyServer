@@ -1,4 +1,3 @@
-using CloudinaryDotNet.Actions;
 using EasyServerApp.EasyServerDB;
 using System.Collections;
 
@@ -55,7 +54,8 @@ public partial class Login : ContentView
                             if (table.EmployeeId.HasValue)
                             {
                                 ContentPage home = new Home(formattedEmployee, tablesPage, table, queuePages, requestServicePages, easyServerRepository);
-                                Navigation.PushAsync(home).RunSynchronously();
+                                Task task = new Task(() => { Navigation.PushAsync(home); });
+                                task.RunSynchronously();
                             }
                             else
                             {
@@ -75,7 +75,8 @@ public partial class Login : ContentView
                 else
                 {
                     ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-                    Navigation.PushAsync(home).RunSynchronously();
+                    Task task = new Task(() => { Navigation.PushAsync(home); });
+                    task.RunSynchronously();
                 }
             }
             else
@@ -211,18 +212,21 @@ public partial class Login : ContentView
             insertedEmployee.Password = insertedEmployee.Password.Trim();
             insertedEmployee.Role = insertedEmployee.Role.Trim();
 
-            // Create a new queue for the employee in the repository
-            List<RestaurantTable> queue = new();
-            easyServerRepository.ServerQueues.Add(insertedEmployee.EmployeeId, queue);
+            /* Create a new queue for the employee in the repository
+            
+            easyServerRepository.ServerQueues.Add(insertedEmployee.EmployeeId, queue);*/
+
+            List<RestaurantTable> serverQueue = (List<RestaurantTable>)easyServerRepository.ServerQueues[insertedEmployee.EmployeeId];
 
             // Create a new queue page for the employee
-            Pages.Queue queuePage = new(insertedEmployee, queue, requestServicePages);
+            Pages.Queue queuePage = new(insertedEmployee, serverQueue, requestServicePages);
             queuePages.Add(insertedEmployee.EmployeeId, queuePage);
 
             Tables tablesPage = new(insertedEmployee, queuePages, requestServicePages, easyServerRepository);
 
             ContentPage home = new Home(insertedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-            Navigation.PushAsync(home).RunSynchronously();
+            Task task = new Task(() => { Navigation.PushAsync(home); });
+            task.RunSynchronously();
 
             GetLgnAccFields();
         }

@@ -1,10 +1,6 @@
-using CloudinaryDotNet.Actions;
 using EasyServerApp.EasyServerDB;
-using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics.Text;
 using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace EasyServerApp.Pages;
 
@@ -17,6 +13,7 @@ public partial class Tables : ContentView
 
     private List<Picker> pickers;
     private List<Label> labels;
+    private List<Button> buttons;
 
     private List<RestaurantTable> restaurantTables;
 
@@ -45,6 +42,7 @@ public partial class Tables : ContentView
 
         labels = new List<Label>();
         pickers = new List<Picker>();
+        buttons = new List<Button>();
 
         restaurantTables = easyServerRepository.GetTableList();
 
@@ -76,7 +74,10 @@ public partial class Tables : ContentView
 
         for (int i = 0; i < restaurantTables.Count; i++)
         {
-            var label = new Label();
+            var label = new Label
+            {
+                ClassId = restaurantTables[i].TableId.ToString()
+            };
 
             if (restaurantTables[i].EmployeeId != null)
             {
@@ -98,7 +99,9 @@ public partial class Tables : ContentView
             {
                 var picker = new Picker
                 {
-                    Title = "Choose an employee: "
+                    Title = "Choose an employee: ",
+                    ClassId = restaurantTables[i].TableId.ToString()
+
                 };
 
                 for (int x = 0; x < employees.Count; x++)
@@ -110,6 +113,20 @@ public partial class Tables : ContentView
                 TablesGrid.Add(picker);
                 TablesGrid.SetRow(picker, rowIndex + 1);
                 TablesGrid.SetColumn(picker, columnIndex);
+
+                var button = new Button
+                {
+                    Text = "Delete Table",
+                    ClassId = restaurantTables[i].TableId.ToString(),
+                    HeightRequest = 50,
+                    VerticalOptions = LayoutOptions.Start
+                };
+
+                button.Clicked += new EventHandler(DeleteTable);
+                buttons.Add(button);
+                TablesGrid.Add(button);
+                TablesGrid.SetRow(button, rowIndex + 2);
+                TablesGrid.SetColumn(button, columnIndex);
             }
 
             columnIndex++;
@@ -118,8 +135,14 @@ public partial class Tables : ContentView
             {
                 columnIndex = 0;
 
-                if (isManager) rowIndex += 2;
-                else rowIndex += 1;
+                if (isManager)
+                {
+                    rowIndex += 3;
+                }
+                else
+                {
+                    rowIndex += 1;
+                }
             }
         }
     }
@@ -133,7 +156,7 @@ public partial class Tables : ContentView
         }
 
         int rows = (int)Math.Ceiling((double)restaurantTables.Count / TablesGrid.ColumnDefinitions.Count);
-        if (isManager) rows *= 2;
+        if (isManager) rows *= 3;
 
         for (int i = 0; i < rows; i++)
         {
@@ -142,7 +165,7 @@ public partial class Tables : ContentView
 
             if (isManager)
             {
-                if (i % 2 != 0)
+                if (i % 3 != 0)
                 {
                     TablesGrid.RowDefinitions[i].Height = 100;
                 }
@@ -179,5 +202,44 @@ public partial class Tables : ContentView
                 pickers[i].SelectedItem = null;
             }        
         }
+    }
+
+    private void AddTable(object sender, System.EventArgs e)
+    {
+        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        char[] stringChars = new char[3];
+        Random random = new();
+        string qrCode;
+
+        do
+        {
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            qrCode = new string(stringChars);
+        }
+        while (easyServerRepository.GetTableByQRCode(qrCode) != null);
+        
+
+        RestaurantTable newTable = easyServerRepository.InsertRestaurantTableRow(qrCode, null);
+        RequestService requestServicePage = new(newTable, null, easyServerRepository);
+        requestServicePages.Add(newTable.TableId, requestServicePage);
+
+        TablesGrid.Clear();
+        GenerateGridContents();
+    }
+
+    private void DeleteTable(object sender, System.EventArgs e)
+    {
+        Button button = buttons.Find((Predicate<Button>)sender);
+        int tableID = int.Parse(button.ClassId);
+        RestaurantTable removedTable = easyServerRepository.DeleteRestaurantTableRow(tableID);
+
+        requestServicePages.Remove(removedTable.TableId);
+
+        TablesGrid.Clear();
+        GenerateGridContents();
     }
 }

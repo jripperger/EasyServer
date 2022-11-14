@@ -1,19 +1,14 @@
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using EasyServerApp.EasyServerDB;
 
 namespace EasyServerApp.Pages;
 
 public partial class RequestService : ContentView
 {
-    
-    private Employee employee;
     private RestaurantTable table;
     public RestaurantTable Table { get { return table; } set { table = value; } }
     private Pages.Queue queuePage;
     public Pages.Queue QueuePage { get { return queuePage; } set { queuePage = value; } }
-    private int tableServerId;
-    public int TableServerID { get { return (int)table.EmployeeId; } set { table.EmployeeId = value; } }
+    public int? TableServerID { get { return table.EmployeeId; } set { table.EmployeeId = value; } }
 
     private EasyServerRepository easyServerRepository;
 
@@ -23,7 +18,6 @@ public partial class RequestService : ContentView
 
         this.easyServerRepository = easyServerRepository;
         this.table = table;
-        tableServerId = (int)table.EmployeeId;
         this.queuePage = queuePage;
             
         TableLbl.Text = "Table " + table.TableId;
@@ -36,7 +30,7 @@ public partial class RequestService : ContentView
 
     public void ToggleServer()
     {
-        List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(TableServerID);
+        List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue((int)TableServerID);
 
         if (ReqServerBtn.Text == "Request Server")
         {

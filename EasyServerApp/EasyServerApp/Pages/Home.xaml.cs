@@ -9,14 +9,11 @@ public partial class Home : ContentPage
     private Employee employee;
     
     private Hashtable queuePages;
-    public Hashtable QueuePages { get { return queuePages; } set { queuePages = value; } }
     private Hashtable requestServicePages;
-    public Hashtable RequestServicePages { get { return requestServicePages; } set { requestServicePages = value; } }
 
     private RestaurantTable table;
     private bool isTables;
-
-    
+ 
     private DateTime TOD;
 
     public Home(Employee employee, Tables tablesPage, RestaurantTable table, Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
@@ -78,34 +75,40 @@ public partial class Home : ContentPage
 
     private void NavigateToEmployees(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Employees(easyServerRepository);
+        HomeFrame.Content = new Employees(queuePages, requestServicePages, easyServerRepository);
     }
 
-    private async void SignOut(object sender, System.EventArgs e)
+    private void SignOut(object sender, System.EventArgs e)
     {
         if (isTables)
         {
-            Navigation.PopToRootAsync().RunSynchronously();
+            Task task = new(() => { Navigation.PopToRootAsync(); });
+            task.RunSynchronously();
         } 
         else
         {
-            string password = await DisplayPromptAsync("Table Sign Out", "Enter administrator password:");
-            Employee employee = easyServerRepository.GetEmployeeByPassword(password);
+            Task<string> password = DisplayPromptAsync("Table Sign Out", "Enter administrator password:");
+            password.RunSynchronously();
+
+            Employee employee = easyServerRepository.GetEmployeeByPassword(password.Result);
 
             if (employee != null)
             {
                 if (employee.Role.Trim() == "Manager")
                 {
-                    Navigation.PopToRootAsync().RunSynchronously();
+                    Task task = new(() => { Navigation.PopToRootAsync(); });
+                    task.RunSynchronously();
                 }
                 else
                 {
-                    DisplayAlert("Logout Failed", "Invalid password", "OK").RunSynchronously();
+                    Task task = new(() => { DisplayAlert("Logout Failed", "Invalid password", "OK"); });
+                    task.RunSynchronously();
                 }
             } 
             else
             {
-                DisplayAlert("Logout Failed", "Invalid password", "OK").RunSynchronously();
+                Task task = new(() => { DisplayAlert("Logout Failed", "Invalid password", "OK"); });
+                task.RunSynchronously();
             }        
         }
     }

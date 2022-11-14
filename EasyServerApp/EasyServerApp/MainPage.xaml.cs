@@ -1,8 +1,6 @@
 ﻿using EasyServerApp.EasyServerDB;
 using EasyServerApp.Pages;
 using System.Collections;
-using System.Data.SqlTypes;
-using System.Xml.Linq;
 
 namespace EasyServerApp;
 

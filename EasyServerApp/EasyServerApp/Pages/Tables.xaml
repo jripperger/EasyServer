@@ -21,5 +21,12 @@
             x:Name="SaveBtn"
             Clicked="SaveServers"
             WidthRequest="500"/>
+        <Button
+            Text="Add Table"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            x:Name="AddBtn"
+            Clicked="AddTable"
+            WidthRequest="500"/>
     </VerticalStackLayout>
 </ContentView>
