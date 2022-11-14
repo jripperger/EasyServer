@@ -6,30 +6,27 @@ namespace EasyServerApp.Pages;
 
 public partial class RequestService : ContentView
 {
-    EasyServerRepository easyServerRepository;
-    private RestaurantTable table;
+    
     private Employee employee;
-    private Queue queuePage;
+    private RestaurantTable table;
+    public RestaurantTable Table { get { return table; } set { table = value; } }
+    private Pages.Queue queuePage;
+    public Pages.Queue QueuePage { get { return queuePage; } set { queuePage = value; } }
+    private int tableServerId;
+    public int TableServerID { get { return (int)table.EmployeeId; } set { table.EmployeeId = value; } }
 
-    public int TableID { get { return table.TableId; } }
-    public RestaurantTable Table { get { return table; } }
+    private EasyServerRepository easyServerRepository;
 
-    public Queue QueuePage { get { return queuePage; } set { queuePage = value; } }
-
-    public RequestService(RestaurantTable table, Queue queuePage, EasyServerRepository easyServerRepository)
+    public RequestService(RestaurantTable table, Pages.Queue queuePage, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
         this.easyServerRepository = easyServerRepository;
         this.table = table;
+        tableServerId = (int)table.EmployeeId;
         this.queuePage = queuePage;
-
-        if (table.EmployeeId.HasValue)
-        {
-            employee = easyServerRepository.GetEmployeeById((int)table.EmployeeId);
-        }
             
-        TableLbl.Text = "Table " + table.TableId.ToString();
+        TableLbl.Text = "Table " + table.TableId;
     }
 
     private void RequestServer(object sender, System.EventArgs e)
@@ -39,7 +36,7 @@ public partial class RequestService : ContentView
 
     public void ToggleServer()
     {
-        List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(employee.EmployeeId);
+        List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(TableServerID);
 
         if (ReqServerBtn.Text == "Request Server")
         {
@@ -52,6 +49,8 @@ public partial class RequestService : ContentView
             ReqServerBtn.Text = "Request Server";
         }
 
+        QueuePage.ToggleQueueContentsLbl();
+        QueuePage.ClearQueueGrid();
         QueuePage.GenerateGridContents();
     }
 }

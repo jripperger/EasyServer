@@ -8,15 +8,11 @@ namespace EasyServerApp;
 
 public partial class MainPage : ContentPage
 {
-    public EasyServerRepository easyServerRepository { get { return _easyServerRepository; }  }
     private EasyServerRepository _easyServerRepository;
+    public EasyServerRepository easyServerRepository { get { return _easyServerRepository; }  }
 
-    private Hashtable _queuePages;
-    public Hashtable QueuePages { get { return _queuePages; } }
-
-    private Hashtable _requestServicePages;
-    public Hashtable RequestServicePages { get { return _requestServicePages; } }
-
+    private Hashtable queuePages;
+    private Hashtable requestServicePages;
 
     public MainPage()
 	{
@@ -24,7 +20,7 @@ public partial class MainPage : ContentPage
         CreateAPI();
         CreatePages();
 
-		MainFrame.Content = new Login(QueuePages, RequestServicePages, easyServerRepository);
+		MainFrame.Content = new Login(queuePages, requestServicePages, easyServerRepository);
     }
 
     private EasyServerRepository CreateAPI()
@@ -42,43 +38,41 @@ public partial class MainPage : ContentPage
         List<Employee> employees = easyServerRepository.Employees;
         List<RestaurantTable> tables = easyServerRepository.RestaurantTables;
 
-        if (_queuePages == null)
+        if (queuePages == null)
         {
-            _queuePages = new Hashtable();
+            queuePages = new Hashtable();
         }
 
-        if (_requestServicePages == null)
+        if (requestServicePages == null)
         {
-            _requestServicePages = new Hashtable();
+            requestServicePages = new Hashtable();
         }
 
         for (int i = 0; i< employees.Count; i++)
         {
-            Employee formattedEmployee = new() {
-                FirstName = employees[i].FirstName.Trim(),
-                LastName = employees[i].LastName.Trim(),
-                Username = employees[i].Username.Trim(),
-                Password = employees[i].Password.Trim(),
-                Role = employees[i].Role.Trim(),
-                EmployeeId = employees[i].EmployeeId
-            };
+            Employee formattedEmployee = employees[i];
+            formattedEmployee.FirstName = formattedEmployee.FirstName.Trim();
+            formattedEmployee.LastName = formattedEmployee.LastName.Trim();
+            formattedEmployee.Username = formattedEmployee.Username.Trim();
+            formattedEmployee.Password = formattedEmployee.Password.Trim();
+            formattedEmployee.Role = formattedEmployee.Role.Trim();
 
             List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(formattedEmployee.EmployeeId);
-            Pages.Queue queuePage = new(formattedEmployee, serverQueue, RequestServicePages, easyServerRepository);
-            _queuePages.Add(formattedEmployee.EmployeeId, queuePage);
+            Pages.Queue queuePage = new(formattedEmployee, serverQueue, requestServicePages);
+            queuePages.Add(employees[i].EmployeeId, queuePage);
         }
 
         for (int i = 0; i < tables.Count; i++)
         {
             if (tables[i].EmployeeId.HasValue)
             { 
-                RequestService requestServicePage = new(tables[i], (Pages.Queue)QueuePages[tables[i].EmployeeId], easyServerRepository);
-                _requestServicePages.Add(tables[i].TableId, requestServicePage);
+                RequestService requestServicePage = new(tables[i], (Pages.Queue)queuePages[tables[i].EmployeeId], easyServerRepository);
+                requestServicePages.Add(tables[i].TableId, requestServicePage);
             }
             else
             {
                 RequestService requestServicePage = new(tables[i], null, easyServerRepository);
-                _requestServicePages.Add(tables[i].TableId, requestServicePage);
+                requestServicePages.Add(tables[i].TableId, requestServicePage);
             }                    
         }
     }

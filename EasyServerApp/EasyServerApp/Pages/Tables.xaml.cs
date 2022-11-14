@@ -76,11 +76,7 @@ public partial class Tables : ContentView
 
         for (int i = 0; i < restaurantTables.Count; i++)
         {
-            var label = new Label
-            {
-                ClassId = "TableIDLabel",
-                StyleId = "TableIDLabel" + (i + 1)
-            };
+            var label = new Label();
 
             if (restaurantTables[i].EmployeeId != null)
             {
@@ -100,8 +96,10 @@ public partial class Tables : ContentView
 
             if (isManager)
             {
-                var picker = new Picker();
-                picker.Title = "Choose an employee: ";
+                var picker = new Picker
+                {
+                    Title = "Choose an employee: "
+                };
 
                 for (int x = 0; x < employees.Count; x++)
                 {
@@ -171,8 +169,10 @@ public partial class Tables : ContentView
 
                 if (restaurantTables[i].EmployeeId != employee.EmployeeId)
                 {
-                    ((RequestService)requestServicePages[restaurantTables[i].TableId]).QueuePage = (Queue)queuePages[employee.EmployeeId];
+                    ((RequestService)requestServicePages[restaurantTables[i].TableId]).QueuePage = (Pages.Queue)queuePages[employee.EmployeeId];
+                    ((RequestService)requestServicePages[restaurantTables[i].TableId]).TableServerID = employee.EmployeeId;
                     easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
+
                     labels[i].Text = restaurantTables[i].TableId + ": " + employeeName;
                 }
 

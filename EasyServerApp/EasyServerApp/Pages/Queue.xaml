@@ -11,6 +11,7 @@
         <Label 
             x:Name="QueueContentsLbl"
             Text="There are no tables awaiting service."
+            IsVisible="{Binding Source={RelativeSource Mode=Self}}"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
         

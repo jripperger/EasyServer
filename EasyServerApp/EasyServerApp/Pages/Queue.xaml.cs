@@ -1,5 +1,6 @@
 using EasyServerApp.EasyServerDB;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
 namespace EasyServerApp.Pages;
@@ -7,19 +8,18 @@ namespace EasyServerApp.Pages;
 public partial class Queue : ContentView
 {
     private Employee employee;
-    private EasyServerRepository easyServerRepository;
     private List<RestaurantTable> serverQueue;
     private List<Button> serviceButtons;
     private Hashtable requestServicePages;
 
-    public Queue(Employee employee, List<RestaurantTable> serverQueue, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
+    public Queue(Employee employee, List<RestaurantTable> serverQueue, Hashtable requestServicePages)
 	{
 		InitializeComponent();
 
         this.employee = employee;
         this.serverQueue = serverQueue;
         this.requestServicePages = requestServicePages;
-        this.easyServerRepository = easyServerRepository;
+
         serviceButtons= new List<Button>();
   
         QueueLbl.Text = employee.FirstName + " " + employee.LastName + "'s Queue";
@@ -71,7 +71,25 @@ public partial class Queue : ContentView
     {
         ((RequestService)requestServicePages[serverQueue.FirstOrDefault().TableId]).ToggleServer();
 
-        QueueGrid.Clear();
+        ToggleQueueContentsLbl();
+        ClearQueueGrid();
         GenerateGridContents();
+    }
+
+    public void ToggleQueueContentsLbl()
+    {
+        if (serverQueue.Count == 0)
+        {
+            QueueContentsLbl.IsVisible = true;
+        }
+        else
+        {
+            QueueContentsLbl.IsVisible = false;
+        }
+    }
+
+    public void ClearQueueGrid()
+    {
+        QueueGrid.Clear();
     }
 }

@@ -20,7 +20,7 @@ namespace EasyServerApp.EasyServerDB
         public List<RestaurantTable> RestaurantTables { get { return tables; } }
 
         private Hashtable serverQueues;
-        public Hashtable ServerQueues { get { return serverQueues; } }
+        public Hashtable ServerQueues { get { return serverQueues; } set { serverQueues = value; } }
 
         public EasyServerRepository()
         {
@@ -103,7 +103,7 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
-        public void InsertEmployeeRow(string firstName, string lastName, string username, string password, string role = "Server")
+        public Employee InsertEmployeeRow(string firstName, string lastName, string username, string password, string role = "Server")
         {
             using (var context = new EasyServerContext())
             {
@@ -118,10 +118,11 @@ namespace EasyServerApp.EasyServerDB
 
                 context.Employee.Add(newEmployee);
                 context.SaveChanges();
+                return context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault();
             }
         }
 
-        public void InsertRestaurantTableRow(string qrCode, int? employeeID)
+        public RestaurantTable InsertRestaurantTableRow(string qrCode, int? employeeID)
         {
             using (var context = new EasyServerContext())
             {
@@ -133,6 +134,7 @@ namespace EasyServerApp.EasyServerDB
 
                 context.RestaurantTable.Add(newTable);
                 context.SaveChanges();
+                return context.RestaurantTable.OrderBy(x => x.TableId).LastOrDefault();
             }
         }
 
@@ -152,8 +154,7 @@ namespace EasyServerApp.EasyServerDB
                 RestaurantTable table = GetTableById(tableID);
 
                 if (table != null)
-                {
-                    
+                {             
                     table.EmployeeId = employeeID;
                     context.RestaurantTable.Update(table);
                     context.SaveChanges();

@@ -6,7 +6,7 @@ namespace EasyServerApp.Pages;
 
 public partial class Login : ContentView
 {
-    private readonly EasyServerRepository easyServerRepository;
+    private EasyServerRepository easyServerRepository;
     private Hashtable queuePages;
     private Hashtable requestServicePages;
 
@@ -19,7 +19,7 @@ public partial class Login : ContentView
         this.easyServerRepository = easyServerRepository;
     }
 
-    private async void AuthenticateUser(object sender, System.EventArgs e)
+    private void AuthenticateUser(object sender, System.EventArgs e)
     {
         string username = UsernameField.Text;
         string password = PasswordField.Text;
@@ -34,15 +34,14 @@ public partial class Login : ContentView
 
             if (employee != null)
             {
-                Employee formattedEmployee = new()
-                {
-                    FirstName = employee.FirstName.Trim(),
-                    LastName = employee.LastName.Trim(),
-                    Username = employee.Username.Trim(),
-                    Password = employee.Password.Trim(),
-                    Role = employee.Role.Trim(),
-                    EmployeeId = employee.EmployeeId
-                };
+                Employee formattedEmployee = employee;
+                formattedEmployee.FirstName = formattedEmployee.FirstName.Trim();
+                formattedEmployee.LastName = formattedEmployee.LastName.Trim();
+                formattedEmployee.Username = formattedEmployee.Username.Trim();
+                formattedEmployee.Password = formattedEmployee.Password.Trim();
+                formattedEmployee.Role = formattedEmployee.Role.Trim();
+
+                Tables tablesPage = new(formattedEmployee, queuePages, requestServicePages, easyServerRepository);
 
                 if (TableIDField.IsVisible == true)
                 {
@@ -55,11 +54,8 @@ public partial class Login : ContentView
                         {
                             if (table.EmployeeId.HasValue)
                             {
-                                RequestService requestServicePage = GetRequestServicePage(tableID);
-                                Queue queuePage = GetQueuePage((int)table.EmployeeId);
-
-                                ContentPage home = new Home(formattedEmployee, null, requestServicePage, queuePage, easyServerRepository);
-                                await Navigation.PushAsync(home);
+                                ContentPage home = new Home(formattedEmployee, tablesPage, table, queuePages, requestServicePages, easyServerRepository);
+                                Navigation.PushAsync(home).RunSynchronously();
                             }
                             else
                             {
@@ -78,11 +74,8 @@ public partial class Login : ContentView
                 }
                 else
                 {
-                    Tables tablesPage = new(formattedEmployee, queuePages, requestServicePages, easyServerRepository);
-                    Queue queuePage = GetQueuePage(formattedEmployee.EmployeeId);
-
-                    ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePage, easyServerRepository);
-                    await Navigation.PushAsync(home);
+                    ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
+                    Navigation.PushAsync(home).RunSynchronously();
                 }
             }
             else
@@ -186,14 +179,14 @@ public partial class Login : ContentView
         Warning.Text = "";
     }
 
-    private async void CreateAccount(object sender, System.EventArgs e)
+    private void CreateAccount(object sender, System.EventArgs e)
     {
         string firstName = FirstNameField.Text;
         string lastName = LastNameField.Text;
         string username = NewUsernameField.Text;
         string password = NewPasswordField.Text;
 
-        Employee newEmployee = new Employee()
+        Employee newEmployee = new()
         {
             FirstName = firstName,
             LastName = lastName,
@@ -211,50 +204,27 @@ public partial class Login : ContentView
         }
         else
         {
-            easyServerRepository.InsertEmployeeRow(firstName, lastName, username, password);
-
-            
+            Employee insertedEmployee = easyServerRepository.InsertEmployeeRow(firstName, lastName, username, password);
+            insertedEmployee.FirstName = insertedEmployee.FirstName.Trim();
+            insertedEmployee.LastName = insertedEmployee.LastName.Trim();
+            insertedEmployee.Username = insertedEmployee.Username.Trim();
+            insertedEmployee.Password = insertedEmployee.Password.Trim();
+            insertedEmployee.Role = insertedEmployee.Role.Trim();
 
             // Create a new queue for the employee in the repository
             List<RestaurantTable> queue = new();
-            easyServerRepository.ServerQueues.Add(newEmployee.EmployeeId, queue);
+            easyServerRepository.ServerQueues.Add(insertedEmployee.EmployeeId, queue);
 
             // Create a new queue page for the employee
-            Queue queuePage = new(newEmployee, queue, requestServicePages, easyServerRepository);
-            queuePages.Add(newEmployee.EmployeeId, queuePage);
+            Pages.Queue queuePage = new(insertedEmployee, queue, requestServicePages);
+            queuePages.Add(insertedEmployee.EmployeeId, queuePage);
 
-            Tables tables = new(newEmployee, queuePages, requestServicePages, easyServerRepository);
+            Tables tablesPage = new(insertedEmployee, queuePages, requestServicePages, easyServerRepository);
 
-            ContentPage home = new Home(newEmployee, tables, null, queuePage, easyServerRepository);
-            await Navigation.PushAsync(home);
+            ContentPage home = new Home(insertedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
+            Navigation.PushAsync(home).RunSynchronously();
 
-            FirstNameField.Text = "";
-            LastNameField.Text = "";
-            NewUsernameField.Text = "";
-            NewPasswordField.Text = "";
-            Warning.Text = "";
-
-            LoginLbl.Text = "Login";
-            FirstNameField.IsVisible = false;
-            LastNameField.IsVisible = false;
-            NewUsernameField.IsVisible = false;
-            NewPasswordField.IsVisible = false;
-            CreateAccBtn.IsVisible = false;
-            LgnAccFieldsBtn.IsVisible = false;
-
-            UsernameField.IsVisible = true;
-            PasswordField.IsVisible = true;
-            LoginBtn.IsVisible = true;
+            GetLgnAccFields();
         }
-    }
-
-    private RequestService GetRequestServicePage(int id)
-    {
-        return (RequestService)requestServicePages[id];
-    }
-
-    private Queue GetQueuePage(int id)
-    {
-        return (Queue)queuePages[id];
     }
 }

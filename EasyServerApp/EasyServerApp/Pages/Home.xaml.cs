@@ -5,40 +5,36 @@ namespace EasyServerApp.Pages;
 
 public partial class Home : ContentPage
 {
+    private EasyServerRepository easyServerRepository;
     private Employee employee;
-
-    private RequestService requestServicePage;
-    private Queue queuePage;
+    
+    private Hashtable queuePages;
+    public Hashtable QueuePages { get { return queuePages; } set { queuePages = value; } }
+    private Hashtable requestServicePages;
+    public Hashtable RequestServicePages { get { return requestServicePages; } set { requestServicePages = value; } }
 
     private RestaurantTable table;
     private bool isTables;
 
-    private EasyServerRepository easyServerRepository;
+    
     private DateTime TOD;
 
-    public Home(Employee employee, Tables tablesPage, RequestService requestServicePage, Queue queuePage, EasyServerRepository easyServerRepository)
+    public Home(Employee employee, Tables tablesPage, RestaurantTable table, Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
 
-        this.employee = employee;
-        this.queuePage= queuePage;
-        this.requestServicePage = requestServicePage;
+        this.queuePages = queuePages;
+        this.requestServicePages = requestServicePages;
         this.easyServerRepository = easyServerRepository; 
 
         TOD = DateTime.Now;
-
-        if (employee.Role == "Manager")
-        {
-            ToEmployeesBtn.IsVisible = true;
-        }
         
-        if (requestServicePage != null)
+        if (table != null)
         {
-            HomeFrame.Content = requestServicePage;
+            this.table = table;
+            HomeFrame.Content = (RequestService)requestServicePages[table.TableId];
             DisplayCustomerGreeting();
-
-            table = requestServicePage.Table;
-
+         
             ToggleViewBtn.IsVisible = true;
             ToTablesBtn.IsVisible = false;
             ToQueueBtn.IsVisible = false;
@@ -48,6 +44,17 @@ public partial class Home : ContentPage
         }
         else
         {
+            this.employee = employee;
+
+            if (employee.Role == "Manager")
+            {
+                ToEmployeesBtn.IsVisible = true;
+            }
+            else
+            {
+                ToEmployeesBtn.IsVisible = false;
+            }
+
             HomeFrame.Content = tablesPage;
             DisplayEmployeeGreeting();
 
@@ -61,12 +68,12 @@ public partial class Home : ContentPage
 
     private void NavigateToTables(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Tables(employee, easyServerRepository);
+        HomeFrame.Content = new Tables(employee, queuePages, requestServicePages, easyServerRepository);
     }
 
     private void NavigateToQueue(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = queuePage;
+        HomeFrame.Content = (Pages.Queue)queuePages[employee.EmployeeId];
     }
 
     private void NavigateToEmployees(object sender, System.EventArgs e)
@@ -78,27 +85,27 @@ public partial class Home : ContentPage
     {
         if (isTables)
         {
-            await Navigation.PopToRootAsync();
+            Navigation.PopToRootAsync().RunSynchronously();
         } 
         else
         {
-            string password = await DisplayPromptAsync("Table Sign Out", "Enter manager password:");
+            string password = await DisplayPromptAsync("Table Sign Out", "Enter administrator password:");
             Employee employee = easyServerRepository.GetEmployeeByPassword(password);
 
             if (employee != null)
             {
                 if (employee.Role.Trim() == "Manager")
                 {
-                    await Navigation.PopToRootAsync();
+                    Navigation.PopToRootAsync().RunSynchronously();
                 }
                 else
                 {
-                    await DisplayAlert("Logout Failed", "Invalid password", "OK");
+                    DisplayAlert("Logout Failed", "Invalid password", "OK").RunSynchronously();
                 }
             } 
             else
             {
-                await DisplayAlert("Logout Failed", "Invalid password", "OK");
+                DisplayAlert("Logout Failed", "Invalid password", "OK").RunSynchronously();
             }        
         }
     }
@@ -139,13 +146,13 @@ public partial class Home : ContentPage
     {
         if (ToggleViewBtn.Text == "View Queue")
         {
-            HomeFrame.Content = queuePage;
+            HomeFrame.Content = (Pages.Queue)queuePages[table.EmployeeId];
             
             ToggleViewBtn.Text = "Request Service";
         }
         else
         {
-            HomeFrame.Content = requestServicePage;
+            HomeFrame.Content = (RequestService)requestServicePages[table.TableId];
 
             ToggleViewBtn.Text = "View Queue";
         }
