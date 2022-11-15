@@ -7,19 +7,20 @@ namespace EasyServerApp.Pages;
 public partial class Employees : ContentView
 {
     private EasyServerRepository easyServerRepository;
-    private List<Employee> employees;
     private Hashtable queuePages;
     private Hashtable requestServicePages;
     private List<Label> labels;
     private List<Picker> pickers;
     private List<Button> buttons;
+    private Employee employee;
 
-    public Employees(Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
+    public Employees(Employee employee, Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
         this.easyServerRepository = easyServerRepository;
-        employees = easyServerRepository.Employees;
+        this.employee = employee;
+        
         this.queuePages = queuePages;
         this.requestServicePages = requestServicePages;
 
@@ -32,7 +33,9 @@ public partial class Employees : ContentView
 
     private void GenerateGridContents()
     {
-        GenerateGridLayout();
+        List<Employee> employees = easyServerRepository.Employees;
+
+        GenerateGridLayout(employees.Count);
 
         int rowIndex = 0;
 
@@ -43,7 +46,12 @@ public partial class Employees : ContentView
         {
             var label = new Label
             {
-                ClassId = employees[i].EmployeeId.ToString()
+                ClassId = employees[i].EmployeeId.ToString(),
+                WidthRequest = 250,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 15
             };
 
             int employeeID = employees[i].EmployeeId;
@@ -59,7 +67,10 @@ public partial class Employees : ContentView
             var picker = new Picker
             {
                 Title = "Choose a role: ",
-                ClassId = employees[i].EmployeeId.ToString()
+                ClassId = employees[i].EmployeeId.ToString(),
+                WidthRequest = 250,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.Center
             };
 
             picker.Items.Add("Server");
@@ -74,9 +85,20 @@ public partial class Employees : ContentView
             {
                 Text = "Delete Employee",
                 ClassId = employees[i].EmployeeId.ToString(),
-                HeightRequest = 50,
-                VerticalOptions = LayoutOptions.Start
+                HeightRequest = 40,
+                WidthRequest = 160,
+                VerticalOptions = LayoutOptions.Start,
+                HorizontalOptions = LayoutOptions.Center
             };
+
+            if (button.ClassId == this.employee.EmployeeId.ToString())
+            {
+                button.IsEnabled = false;
+            }
+            else
+            {
+                button.IsEnabled = true;
+            }
 
             button.Clicked += new EventHandler(DeleteEmployee);
             buttons.Add(button);
@@ -95,15 +117,16 @@ public partial class Employees : ContentView
         }
     }
 
-    private void GenerateGridLayout()
+    private void GenerateGridLayout(int employeeCount)
     {
         for (int i = 0; i < 6; i++)
         {
             ColumnDefinition columnDefinition = new();
+            columnDefinition.Width = 250;
             EmployeesGrid.AddColumnDefinition(columnDefinition);
         }
 
-        int rows = ((int)Math.Ceiling((double)employees.Count / EmployeesGrid.ColumnDefinitions.Count) * 3);
+        int rows = (int)Math.Ceiling((double)employeeCount / EmployeesGrid.ColumnDefinitions.Count) * 3;
 
         for (int i = 0; i < rows; i++)
         {
@@ -112,7 +135,7 @@ public partial class Employees : ContentView
 
             if (i % 3 != 0)
             {
-                EmployeesGrid.RowDefinitions[i].Height = 100;
+                EmployeesGrid.RowDefinitions[i].Height = 75;
             }
         }
     }
@@ -136,22 +159,26 @@ public partial class Employees : ContentView
 
     private void DeleteEmployee(object sender, System.EventArgs e)
     {
-        Button button = buttons.Find((Predicate<Button>)sender);
+        Button button = (Button)sender;
         int employeeID = int.Parse(button.ClassId);
         Employee removedEmployee = easyServerRepository.DeleteEmployeeRow(employeeID);
 
         queuePages.Remove(removedEmployee.EmployeeId);
 
-        for (int i = 1; i <= requestServicePages.Count; i++)
+        for (int i = 0; i < easyServerRepository.RestaurantTables.Count; i++)
         {
-            if (((RequestService)requestServicePages[i]).TableServerID == employeeID)
+            if (((RequestService)requestServicePages[easyServerRepository.RestaurantTables[i].TableId]).TableServerID == employeeID)
             {
-                ((RequestService)requestServicePages[i]).TableServerID = null;
-                easyServerRepository.UpdateTableServer((int)((RequestService)requestServicePages[i]).TableServerID, null);
+                ((RequestService)requestServicePages[easyServerRepository.RestaurantTables[i].TableId]).TableServerID = null;
             }
         }
 
+        labels.Clear();
+        pickers.Clear();
+        buttons.Clear();
         EmployeesGrid.Clear();
+        EmployeesGrid.RowDefinitions.Clear();
+        EmployeesGrid.ColumnDefinitions.Clear();
         GenerateGridContents();
     }
 }

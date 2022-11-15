@@ -6,6 +6,7 @@
         <Label 
             Text="Manage Employees"
             FontSize="Medium"
+            FontAttributes="Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
         <Grid 
@@ -15,10 +16,11 @@
             x:Name="EmployeesGrid"
             ColumnSpacing="50"/>
         <Button
-            Text="Save Configuration"
+            Text="Assign Roles"
             VerticalOptions="Center"
             x:Name="SaveBtn"
             Clicked="SaveServers"
-            WidthRequest="500"/>
+            HeightRequest="40"
+            WidthRequest="250"/>
     </VerticalStackLayout>
 </ContentView>

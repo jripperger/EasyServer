@@ -54,7 +54,7 @@ public partial class Login : ContentView
                             if (table.EmployeeId.HasValue)
                             {
                                 ContentPage home = new Home(formattedEmployee, tablesPage, table, queuePages, requestServicePages, easyServerRepository);
-                                Task task = new Task(() => { Navigation.PushAsync(home); });
+                                Task task = new(() => { Navigation.PushAsync(home); });
                                 task.RunSynchronously();
                             }
                             else
@@ -75,7 +75,7 @@ public partial class Login : ContentView
                 else
                 {
                     ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-                    Task task = new Task(() => { Navigation.PushAsync(home); });
+                    Task task = new(() => { Navigation.PushAsync(home); });
                     task.RunSynchronously();
                 }
             }
@@ -95,6 +95,7 @@ public partial class Login : ContentView
     private void ToggleLgnAccFields(object sender, System.EventArgs e)
     {
         GetLgnAccFields();
+        Warning.Text = "";
     }
 
     private void GetLgnAccFields()
@@ -121,8 +122,6 @@ public partial class Login : ContentView
         PasswordField.Text = "";
         NewUsernameField.Text = "";
         NewPasswordField.Text = "";
-
-        Warning.Text = "";
     }
 
     private void ToggleCrtAccFields(object sender, System.EventArgs e)
@@ -212,10 +211,6 @@ public partial class Login : ContentView
             insertedEmployee.Password = insertedEmployee.Password.Trim();
             insertedEmployee.Role = insertedEmployee.Role.Trim();
 
-            /* Create a new queue for the employee in the repository
-            
-            easyServerRepository.ServerQueues.Add(insertedEmployee.EmployeeId, queue);*/
-
             List<RestaurantTable> serverQueue = (List<RestaurantTable>)easyServerRepository.ServerQueues[insertedEmployee.EmployeeId];
 
             // Create a new queue page for the employee
@@ -225,7 +220,7 @@ public partial class Login : ContentView
             Tables tablesPage = new(insertedEmployee, queuePages, requestServicePages, easyServerRepository);
 
             ContentPage home = new Home(insertedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-            Task task = new Task(() => { Navigation.PushAsync(home); });
+            Task task = new(() => { Navigation.PushAsync(home); });
             task.RunSynchronously();
 
             GetLgnAccFields();

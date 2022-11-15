@@ -6,10 +6,13 @@
         <Label 
             x:Name="QueueLbl"
             FontSize="Medium"
+            FontAttributes="Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
         <Label 
             x:Name="QueueContentsLbl"
+            FontAttributes="Bold"
+            Margin="0, 20, 0, 0"
             Text="There are no tables awaiting service."
             IsVisible="{Binding Source={RelativeSource Mode=Self}}"
             VerticalOptions="Center" 
@@ -17,6 +20,7 @@
         
         <Grid 
             VerticalOptions="Center" 
+            Margin="0, 20, 0, 0"
             HorizontalOptions="Center"
             x:Name="QueueGrid">
 

@@ -75,10 +75,10 @@ public partial class Home : ContentPage
 
     private void NavigateToEmployees(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Employees(queuePages, requestServicePages, easyServerRepository);
+        HomeFrame.Content = new Employees(employee, queuePages, requestServicePages, easyServerRepository);
     }
 
-    private void SignOut(object sender, System.EventArgs e)
+    private async void SignOut(object sender, System.EventArgs e)
     {
         if (isTables)
         {
@@ -87,10 +87,8 @@ public partial class Home : ContentPage
         } 
         else
         {
-            Task<string> password = DisplayPromptAsync("Table Sign Out", "Enter administrator password:");
-            password.RunSynchronously();
-
-            Employee employee = easyServerRepository.GetEmployeeByPassword(password.Result);
+            string password = await DisplayPromptAsync("Table Sign Out", "Enter administrator password:"); 
+            Employee employee = easyServerRepository.GetEmployeeByPassword(password);
 
             if (employee != null)
             {

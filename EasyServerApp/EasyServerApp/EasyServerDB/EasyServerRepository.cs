@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Office2010.Excel;
 using EasyServerApp.Pages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections;
@@ -15,13 +16,13 @@ namespace EasyServerApp.EasyServerDB
     public sealed class EasyServerRepository
     {
         private List<Employee> employees;
-        public List<Employee> Employees { get { return employees; } }
+        public List<Employee> Employees { get { return employees; } private set { employees = value; } }
 
         private List<RestaurantTable> tables;
-        public List<RestaurantTable> RestaurantTables { get { return tables; } }
+        public List<RestaurantTable> RestaurantTables { get { return tables; } private set { tables = value; } }
 
         private Hashtable serverQueues;
-        public Hashtable ServerQueues { get { return serverQueues; } }
+        public Hashtable ServerQueues { get { return serverQueues; } private set { serverQueues = value; } }
 
         public EasyServerRepository()
         {
@@ -119,10 +120,10 @@ namespace EasyServerApp.EasyServerDB
 
                 context.Employee.Add(newEmployee);
                 context.SaveChanges();
-                employees = GetEmployeeList();
+                Employees = GetEmployeeList();
 
                 List<RestaurantTable> queue = new();
-                serverQueues.Add(context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault(), queue);
+                ServerQueues.Add(context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault().EmployeeId, queue);
 
                 return context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault();
             }
@@ -136,9 +137,19 @@ namespace EasyServerApp.EasyServerDB
 
                 if (employee != null)
                 {
-                    context.Employee.Remove(employee);
+                    Task task = new(() => { context.Employee.Remove(employee); });
+                    task.RunSynchronously();
+
+                    for (int i = 0; i < RestaurantTables.Count; i++)
+                    {
+                        if (RestaurantTables[i].EmployeeId == employeeID)
+                        {
+                            UpdateTableServer(RestaurantTables[i].TableId, null);
+                        }
+                    }
+
                     context.SaveChanges();
-                    employees = GetEmployeeList();
+                    Employees = GetEmployeeList();
 
                     serverQueues.Remove(employeeID);
                 }
@@ -159,7 +170,7 @@ namespace EasyServerApp.EasyServerDB
 
                 context.RestaurantTable.Add(newTable);
                 context.SaveChanges();
-                tables = GetTableList();
+                RestaurantTables = GetTableList();
 
                 return context.RestaurantTable.OrderBy(x => x.TableId).LastOrDefault();
             }
@@ -173,9 +184,10 @@ namespace EasyServerApp.EasyServerDB
 
                 if (table != null)
                 {
-                    context.RestaurantTable.Remove(table);
+                    Task task = new(() => { context.RestaurantTable.Remove(table); });
+                    task.RunSynchronously();
                     context.SaveChanges();
-                    tables = GetTableList();
+                    RestaurantTables = GetTableList();
                 }
               
                 return table;
@@ -210,6 +222,7 @@ namespace EasyServerApp.EasyServerDB
                     table.EmployeeId = employeeID;
                     context.RestaurantTable.Update(table);
                     context.SaveChanges();
+                    RestaurantTables = GetTableList();
                 }             
             }
         }
@@ -226,6 +239,7 @@ namespace EasyServerApp.EasyServerDB
                     employee.Role = role;
                     context.Employee.Update(employee);
                     context.SaveChanges();
+                    Employees = GetEmployeeList();
                 }
             }
         }

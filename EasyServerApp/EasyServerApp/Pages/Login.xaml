@@ -2,53 +2,79 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EasyServerApp.Pages.Login">
-    <VerticalStackLayout>
-        <Label 
-            Text="Login to your Account"
-            FontSize="Medium"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            x:Name="LoginLbl"/>
+    <Grid x:Name="HomeGrid" Margin="10, 20, 10, 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "800"></RowDefinition>
+            <RowDefinition Height = "*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+            <Label 
+                Text="Login to your Account"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0, 0, 0, 10"
+                x:Name="LoginLbl"/>
             <Entry
                 Placeholder="Username" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
                 x:Name="UsernameField"/>
             <Entry 
                 Placeholder="Password"
                 IsPassword="True" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
                 x:Name="PasswordField"/>
             <Entry 
                 Placeholder="Table ID"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
+                Margin="0, 0, 0, 10"
                 x:Name="TableIDField"
+                WidthRequest="250"
                 IsVisible="False"/>
             <Button 
                 Text="Go"
                 x:Name="LoginBtn"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
+                Margin="0, 0, 0, 10"
+                WidthRequest="100"
                 Clicked="AuthenticateUser"/>
             <Entry
                 Placeholder="First Name" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
                 x:Name="FirstNameField" 
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
                 IsVisible="False"/>
             <Entry 
                 Placeholder="Last Name"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
                 x:Name="LastNameField"
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
                 IsVisible="False"/>
             <Entry
                 Placeholder="Username" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
                 x:Name="NewUsernameField"
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
                 IsVisible="False"/>
             <Entry 
                 Placeholder="Password"
@@ -56,46 +82,64 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" 
                 x:Name="NewPasswordField"
-                IsVisible="False"/>      
+                Margin="0, 0, 0, 10"
+                WidthRequest="250"
+                IsVisible="False"/>
             <Button 
                 Text="Sign Up"
                 x:Name="CreateAccBtn"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
                 Clicked="CreateAccount"
+                Margin="0, 0, 0, 10"
+                WidthRequest="100"
                 IsVisible="False"/>
-        <Label 
-            Text="or"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            x:Name="Divider1"/>
-        <Button 
-            Text="Create Account"
-            x:Name="CrtAccFieldsBtn"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            Clicked="ToggleCrtAccFields"/>
-        <Label 
-            Text="or"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            IsVisible="false"
-            x:Name="Divider2"/>
-        <Button 
-            Text="Login to your Account"
-            x:Name="LgnAccFieldsBtn"
-            IsVisible="false"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            Clicked="ToggleLgnAccFields"/>
-        <Label 
-            Text=""
-            x:Name="Warning" />
+            <Label 
+                Text="or"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0, 0, 0, 10"
+                x:Name="Divider1"/>
+            <Button 
+                Text="Create Account"
+                x:Name="CrtAccFieldsBtn"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0, 0, 0, 10"
+                WidthRequest="150"
+                Clicked="ToggleCrtAccFields"/>
+            <Label 
+                Text="or"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                IsVisible="false"
+                Margin="0, 0, 0, 10"
+                x:Name="Divider2"/>
+            <Button 
+                Text="Login to your Account"
+                x:Name="LgnAccFieldsBtn"
+                IsVisible="false"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Margin="0, 0, 0, 10"
+                WidthRequest="200"
+                Clicked="ToggleLgnAccFields"/>
+            <Label 
+                Text=""
+                FontAttributes="Bold"
+                Margin="0, 10, 0, 10"
+                HorizontalOptions="Center"
+                x:Name="Warning" />
+        </VerticalStackLayout>
         <Button
+            Grid.Row="1"
+            Grid.Column="0"
             Text="Table Login"
             x:Name="TableLoginBtn"
-            VerticalOptions="Center"
+            VerticalOptions="End"
             HorizontalOptions="Center"
+            Margin="0, 0, 0, 10"
+            WidthRequest="120"
             Clicked="ToggleTableFields"/>
-    </VerticalStackLayout>
+    </Grid>
 </ContentView>

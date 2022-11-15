@@ -15,8 +15,6 @@ public partial class Tables : ContentView
     private List<Label> labels;
     private List<Button> buttons;
 
-    private List<RestaurantTable> restaurantTables;
-
     private Hashtable queuePages;
     private Hashtable requestServicePages;
 
@@ -34,17 +32,17 @@ public partial class Tables : ContentView
         if (isManager)
         {
             SaveBtn.IsVisible = true;
+            AddBtn.IsVisible = true;
         }
         else
         {
             SaveBtn.IsVisible = false;
+            AddBtn.IsVisible = false;
         }
 
         labels = new List<Label>();
         pickers = new List<Picker>();
         buttons = new List<Button>();
-
-        restaurantTables = easyServerRepository.GetTableList();
 
         GenerateGridContents();
     }
@@ -63,9 +61,10 @@ public partial class Tables : ContentView
 
     private void GenerateGridContents()
     {
-        List<Employee> employees = easyServerRepository.GetEmployeeList();
+        List<Employee> employees = easyServerRepository.Employees;
+        List<RestaurantTable> restaurantTables = easyServerRepository.RestaurantTables;
 
-        GenerateGridLayout();
+        GenerateGridLayout(restaurantTables.Count);
 
         int rowIndex = 0;
 
@@ -76,18 +75,23 @@ public partial class Tables : ContentView
         {
             var label = new Label
             {
-                ClassId = restaurantTables[i].TableId.ToString()
+                ClassId = restaurantTables[i].TableId.ToString(),
+                WidthRequest = 250,
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 15
             };
 
             if (restaurantTables[i].EmployeeId != null)
             {
                 int employeeID = (int)restaurantTables[i].EmployeeId;
                 Employee employee = easyServerRepository.GetEmployeeById(employeeID);
-                label.Text = "Table " + (i + 1) + ": " + employee.FirstName.Trim() + " " + employee.LastName.Trim() + " [" + employeeID + "]";
+                label.Text = "Table " + label.ClassId + ": " + employee.FirstName.Trim() + " " + employee.LastName.Trim() + " [" + employeeID + "]";
             }
             else
             {
-                label.Text = "Table " + (i + 1) + ": Not assigned";
+                label.Text = "Table " + label.ClassId + ": Not assigned";
             }
             
             labels.Add(label);
@@ -100,8 +104,10 @@ public partial class Tables : ContentView
                 var picker = new Picker
                 {
                     Title = "Choose an employee: ",
-                    ClassId = restaurantTables[i].TableId.ToString()
-
+                    ClassId = restaurantTables[i].TableId.ToString(),
+                    WidthRequest = 250,
+                    VerticalOptions = LayoutOptions.Start,
+                    HorizontalOptions = LayoutOptions.Center
                 };
 
                 for (int x = 0; x < employees.Count; x++)
@@ -118,8 +124,10 @@ public partial class Tables : ContentView
                 {
                     Text = "Delete Table",
                     ClassId = restaurantTables[i].TableId.ToString(),
-                    HeightRequest = 50,
-                    VerticalOptions = LayoutOptions.Start
+                    HeightRequest = 40,
+                    WidthRequest = 160,
+                    VerticalOptions = LayoutOptions.Start,
+                    HorizontalOptions = LayoutOptions.Center
                 };
 
                 button.Clicked += new EventHandler(DeleteTable);
@@ -147,15 +155,16 @@ public partial class Tables : ContentView
         }
     }
 
-    private void GenerateGridLayout()
+    private void GenerateGridLayout(int tableCount)
     {
         for (int i = 0; i < 6; i++)
         {
             ColumnDefinition columnDefinition = new();
+            columnDefinition.Width = 250;
             TablesGrid.AddColumnDefinition(columnDefinition);
         }
 
-        int rows = (int)Math.Ceiling((double)restaurantTables.Count / TablesGrid.ColumnDefinitions.Count);
+        int rows = (int)Math.Ceiling((double)tableCount / TablesGrid.ColumnDefinitions.Count);
         if (isManager) rows *= 3;
 
         for (int i = 0; i < rows; i++)
@@ -167,15 +176,20 @@ public partial class Tables : ContentView
             {
                 if (i % 3 != 0)
                 {
-                    TablesGrid.RowDefinitions[i].Height = 100;
+                    TablesGrid.RowDefinitions[i].Height = 75;
                 }
             }
-            else TablesGrid.RowDefinitions[i].Height = 50;
+            else
+            {
+                TablesGrid.RowDefinitions[i].Height = 50;
+            }
         }
     }
 
     private void SaveServers(object sender, System.EventArgs e)
     {
+        List<RestaurantTable> restaurantTables = easyServerRepository.RestaurantTables;
+
         for (int i = 0; i < pickers.Count; i++)
         {
             if (pickers[i].SelectedItem != null)
@@ -227,19 +241,29 @@ public partial class Tables : ContentView
         RequestService requestServicePage = new(newTable, null, easyServerRepository);
         requestServicePages.Add(newTable.TableId, requestServicePage);
 
+        labels.Clear();
+        pickers.Clear();
+        buttons.Clear();
         TablesGrid.Clear();
+        TablesGrid.RowDefinitions.Clear();
+        TablesGrid.ColumnDefinitions.Clear();
         GenerateGridContents();
     }
 
     private void DeleteTable(object sender, System.EventArgs e)
     {
-        Button button = buttons.Find((Predicate<Button>)sender);
+        Button button = (Button)sender;
         int tableID = int.Parse(button.ClassId);
         RestaurantTable removedTable = easyServerRepository.DeleteRestaurantTableRow(tableID);
 
         requestServicePages.Remove(removedTable.TableId);
 
+        labels.Clear();
+        pickers.Clear();
+        buttons.Clear();
         TablesGrid.Clear();
+        TablesGrid.RowDefinitions.Clear();
+        TablesGrid.ColumnDefinitions.Clear();
         GenerateGridContents();
     }
 }

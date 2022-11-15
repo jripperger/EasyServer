@@ -6,6 +6,7 @@
         <Label 
             Text="Restaurant Tables"
             FontSize="Medium"
+            FontAttributes="Bold"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
         <Grid 
@@ -15,18 +16,21 @@
             x:Name="TablesGrid"
             ColumnSpacing="50"/>
         <Button
-            Text="Save Configuration"
+            Text="Assign Servers"
             VerticalOptions="Center"
             HorizontalOptions="Center"
+            Margin="0, 0, 0, 10"
             x:Name="SaveBtn"
             Clicked="SaveServers"
-            WidthRequest="500"/>
+            HeightRequest="40"
+            WidthRequest="250"/>
         <Button
             Text="Add Table"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             x:Name="AddBtn"
             Clicked="AddTable"
-            WidthRequest="500"/>
+            HeightRequest="40"
+            WidthRequest="150"/>
     </VerticalStackLayout>
 </ContentView>
