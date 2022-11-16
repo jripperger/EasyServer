@@ -56,6 +56,7 @@ public partial class Login : ContentView
                                 ContentPage home = new Home(formattedEmployee, tablesPage, table, queuePages, requestServicePages, easyServerRepository);
                                 Task task = new(() => { Navigation.PushAsync(home); });
                                 task.RunSynchronously();
+                                Warning.Text = "";
                             }
                             else
                             {
@@ -77,6 +78,7 @@ public partial class Login : ContentView
                     ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
                     Task task = new(() => { Navigation.PushAsync(home); });
                     task.RunSynchronously();
+                    Warning.Text = "";
                 }
             }
             else
@@ -162,6 +164,7 @@ public partial class Login : ContentView
         Divider2.IsVisible = true;
         UsernameField.IsVisible = true;
         PasswordField.IsVisible = true;
+        LoginBtn.IsVisible = true;
 
         FirstNameField.IsVisible = false;
         LastNameField.IsVisible = false;

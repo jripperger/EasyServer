@@ -23,13 +23,14 @@ public partial class Home : ContentPage
         this.queuePages = queuePages;
         this.requestServicePages = requestServicePages;
         this.easyServerRepository = easyServerRepository; 
+        this.employee = employee;
+        this.table = table;
 
         TOD = DateTime.Now;
         
-        if (table != null)
+        if (this.table != null)
         {
-            this.table = table;
-            HomeFrame.Content = (RequestService)requestServicePages[table.TableId];
+            HomeFrame.Content = (RequestService)requestServicePages[this.table.TableId];
             DisplayCustomerGreeting();
          
             ToggleViewBtn.IsVisible = true;
@@ -41,9 +42,7 @@ public partial class Home : ContentPage
         }
         else
         {
-            this.employee = employee;
-
-            if (employee.Role == "Manager")
+            if (this.employee.Role == "Manager")
             {
                 ToEmployeesBtn.IsVisible = true;
             }
@@ -147,13 +146,15 @@ public partial class Home : ContentPage
     {
         if (ToggleViewBtn.Text == "View Queue")
         {
-            HomeFrame.Content = (Pages.Queue)queuePages[table.EmployeeId];
+            int id = (int)table.EmployeeId;
+            HomeFrame.Content = (Pages.Queue)queuePages[id];
             
             ToggleViewBtn.Text = "Request Service";
         }
         else
         {
-            HomeFrame.Content = (RequestService)requestServicePages[table.TableId];
+            int id = table.TableId;
+            HomeFrame.Content = (RequestService)requestServicePages[id];
 
             ToggleViewBtn.Text = "View Queue";
         }

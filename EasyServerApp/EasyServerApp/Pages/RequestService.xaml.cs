@@ -34,12 +34,12 @@ public partial class RequestService : ContentView
 
         if (ReqServerBtn.Text == "Request Server")
         {
-            serverQueue.Add(table);
+            serverQueue.Add(Table);
             ReqServerBtn.Text = "Cancel Server Request";
         } 
         else
         {
-            serverQueue.Remove(table);
+            serverQueue.Remove(Table);
             ReqServerBtn.Text = "Request Server";
         }
 

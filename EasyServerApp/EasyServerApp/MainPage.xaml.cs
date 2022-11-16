@@ -56,7 +56,7 @@ public partial class MainPage : ContentPage
             formattedEmployee.Role = formattedEmployee.Role.Trim();
 
             List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(formattedEmployee.EmployeeId);
-            Pages.Queue queuePage = new(formattedEmployee, serverQueue, requestServicePages);
+            Pages.Queue queuePage = new(formattedEmployee, serverQueue, requestServicePages) { ClassId = employees[i].EmployeeId.ToString() };
             queuePages.Add(employees[i].EmployeeId, queuePage);
         }
 
@@ -64,12 +64,12 @@ public partial class MainPage : ContentPage
         {
             if (tables[i].EmployeeId.HasValue)
             { 
-                RequestService requestServicePage = new(tables[i], (Pages.Queue)queuePages[tables[i].EmployeeId], easyServerRepository);
+                RequestService requestServicePage = new(tables[i], (Pages.Queue)queuePages[tables[i].EmployeeId], easyServerRepository) { ClassId = tables[i].TableId.ToString() }; ;
                 requestServicePages.Add(tables[i].TableId, requestServicePage);
             }
             else
             {
-                RequestService requestServicePage = new(tables[i], null, easyServerRepository);
+                RequestService requestServicePage = new(tables[i], null, easyServerRepository) { ClassId = tables[i].TableId.ToString() };
                 requestServicePages.Add(tables[i].TableId, requestServicePage);
             }                    
         }

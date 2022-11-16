@@ -89,5 +89,7 @@ public partial class Queue : ContentView
     public void ClearQueueGrid()
     {
         QueueGrid.Clear();
+        QueueGrid.RowDefinitions.Clear();
+        QueueGrid.ColumnDefinitions.Clear();
     }
 }

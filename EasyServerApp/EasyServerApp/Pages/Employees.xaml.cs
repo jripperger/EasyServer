@@ -38,7 +38,6 @@ public partial class Employees : ContentView
         GenerateGridLayout(employees.Count);
 
         int rowIndex = 0;
-
         int columnCount = EmployeesGrid.ColumnDefinitions.Count;
         int columnIndex = 0;
 
@@ -121,8 +120,11 @@ public partial class Employees : ContentView
     {
         for (int i = 0; i < 6; i++)
         {
-            ColumnDefinition columnDefinition = new();
-            columnDefinition.Width = 250;
+            ColumnDefinition columnDefinition = new()
+            {
+                Width = 250
+            };
+
             EmployeesGrid.AddColumnDefinition(columnDefinition);
         }
 
@@ -146,11 +148,12 @@ public partial class Employees : ContentView
         {
             int employeeID = int.Parse(pickers[i].ClassId);
             Employee employee = easyServerRepository.GetEmployeeById(employeeID);
+            Label label = labels.Where(x => x.ClassId == pickers[i].ClassId).FirstOrDefault();
 
             if (pickers[i].SelectedItem != null && pickers[i].SelectedItem.ToString() != employee.Role.Trim())
             {
                 easyServerRepository.UpdateEmployeeRole(employee.EmployeeId, pickers[i].SelectedItem.ToString());
-                labels[i].Text = employee.FirstName.Trim() + " " + employee.LastName.Trim() + " [" + employee.EmployeeId + "]: " + pickers[i].SelectedItem.ToString();
+                label.Text = employee.FirstName.Trim() + " " + employee.LastName.Trim() + " [" + employee.EmployeeId + "]: " + pickers[i].SelectedItem.ToString();
             }
 
             pickers[i].SelectedItem = null;

@@ -1,3 +1,5 @@
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Data.Common.dll
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Private.CoreLib.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\EasyServerApp.runtimeconfig.json
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\EasyServerApp.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\EasyServerApp.pdb
@@ -59,7 +61,6 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Configuration.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Console.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Core.dll
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Data.Common.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Data.DataSetExtensions.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Data.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Diagnostics.Contracts.dll
@@ -208,7 +209,6 @@ C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Controls.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Essentials.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\Microsoft.MacCatalyst.dll
-C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\System.Private.CoreLib.dll
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\icudt.dat
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\icudt_CJK.dat
 C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net6.0-maccatalyst\maccatalyst-x64\icudt_EFIGS.dat

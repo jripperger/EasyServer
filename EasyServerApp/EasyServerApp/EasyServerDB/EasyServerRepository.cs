@@ -39,9 +39,9 @@ namespace EasyServerApp.EasyServerDB
 
         public List<RestaurantTable> GetServerQueue(int id)
         {
-            if (serverQueues.ContainsKey(id)) 
+            if (ServerQueues.ContainsKey(id)) 
             {
-                return (List<RestaurantTable>)serverQueues[id];
+                return (List<RestaurantTable>)ServerQueues[id];
             }
             else
             {
