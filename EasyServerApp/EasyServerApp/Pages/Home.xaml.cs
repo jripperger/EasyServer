@@ -87,26 +87,30 @@ public partial class Home : ContentPage
         else
         {
             string password = await DisplayPromptAsync("Table Sign Out", "Enter administrator password:"); 
-            Employee employee = easyServerRepository.GetEmployeeByPassword(password);
 
-            if (employee != null)
+            if (password != null)
             {
-                if (employee.Role.Trim() == "Manager")
+                Employee employee = easyServerRepository.GetEmployeeByPassword(password);
+
+                if (employee != null)
                 {
-                    Task task = new(() => { Navigation.PopToRootAsync(); });
-                    task.RunSynchronously();
-                }
+                    if (employee.Role.Trim() == "Manager")
+                    {
+                        Task task = new(() => { Navigation.PopToRootAsync(); });
+                        task.RunSynchronously();
+                    }
+                    else
+                    {
+                        Task task = new(() => { DisplayAlert("Logout Failed", "Invalid password", "OK"); });
+                        task.RunSynchronously();
+                    }
+                } 
                 else
                 {
                     Task task = new(() => { DisplayAlert("Logout Failed", "Invalid password", "OK"); });
                     task.RunSynchronously();
-                }
-            } 
-            else
-            {
-                Task task = new(() => { DisplayAlert("Logout Failed", "Invalid password", "OK"); });
-                task.RunSynchronously();
-            }        
+                }        
+            }      
         }
     }
 
