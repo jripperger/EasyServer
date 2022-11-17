@@ -15,19 +15,18 @@ public partial class Tables : ContentView
     private List<Label> labels;
     private List<Button> buttons;
 
-    private HashSet<Pages.Queue> queuePages;
-    private HashSet<RequestService> requestServicePages;
+    private Hashtable requestServiceStates;
 
-    public Tables(Employee employee, HashSet<Pages.Queue> queuePages, HashSet<RequestService> requestServicePages, EasyServerRepository easyServerRepository)
+    public Tables(Employee employee, Hashtable requestServiceStates, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
-        this.queuePages = queuePages;
-        this.requestServicePages = requestServicePages;
         this.easyServerRepository = easyServerRepository;
 
         this.employee = employee;
         isManager = CheckUser();
+
+        this.requestServiceStates = requestServiceStates;
 
         if (isManager)
         {
@@ -206,8 +205,7 @@ public partial class Tables : ContentView
 
                 if (restaurantTables[i].EmployeeId != employee.EmployeeId)
                 {
-                    requestServicePages.Where(x => x.Table.TableId == restaurantTables[i].TableId).FirstOrDefault().QueuePage = queuePages.Where(x => x.Employee.EmployeeId == employee.EmployeeId).FirstOrDefault();
-                    requestServicePages.Where(x => x.Table.TableId == restaurantTables[i].TableId).FirstOrDefault().TableServerID = employee.EmployeeId;
+                    requestServiceStates[restaurantTables[i].TableId] = false;
                     easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
 
                     labels[i].Text = restaurantTables[i].TableId + ": " + employeeName;
@@ -238,8 +236,7 @@ public partial class Tables : ContentView
         
 
         RestaurantTable newTable = easyServerRepository.InsertRestaurantTableRow(qrCode, null);
-        RequestService requestServicePage = new(newTable, null, easyServerRepository);
-        requestServicePages.Add(requestServicePage);
+        requestServiceStates.Add(newTable.TableId, false);
 
         labels.Clear();
         pickers.Clear();
@@ -256,7 +253,7 @@ public partial class Tables : ContentView
         int tableID = int.Parse(button.ClassId);
         RestaurantTable removedTable = easyServerRepository.DeleteRestaurantTableRow(tableID);
 
-        requestServicePages.Remove(requestServicePages.Where(x => x.Table.TableId == removedTable.TableId).FirstOrDefault());
+        requestServiceStates.Remove(removedTable.TableId);
 
         labels.Clear();
         pickers.Clear();

@@ -7,21 +7,19 @@ public partial class Home : ContentPage
 {
     private EasyServerRepository easyServerRepository;
     private Employee employee;
-    
-    private HashSet<Pages.Queue> queuePages;
-    private HashSet<RequestService> requestServicePages;
+
+    private Hashtable requestServiceStates;
 
     private RestaurantTable table;
     private bool isTables;
  
     private DateTime TOD;
 
-    public Home(Employee employee, Tables tablesPage, RestaurantTable table, HashSet<Pages.Queue> queuePages, HashSet<RequestService> requestServicePages, EasyServerRepository easyServerRepository)
+    public Home(Employee employee, RestaurantTable table, Hashtable requestServiceStates, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
 
-        this.queuePages = queuePages;
-        this.requestServicePages = requestServicePages;
+        this.requestServiceStates = requestServiceStates;
         this.easyServerRepository = easyServerRepository; 
 
         TOD = DateTime.Now;
@@ -29,7 +27,13 @@ public partial class Home : ContentPage
         if (table != null)
         {
             this.table = table;
-            HomeFrame.Content = requestServicePages.Where(x => x.Table.TableId == table.TableId).FirstOrDefault();
+
+            Employee tableServer = easyServerRepository.GetEmployeeById((int)table.EmployeeId);
+
+            Pages.Queue queuePage = new(tableServer, easyServerRepository.ServerQueues, this.requestServiceStates);
+
+            HomeFrame.Content = new RequestService(table, queuePage, this.requestServiceStates, this.easyServerRepository);
+
             DisplayCustomerGreeting();
          
             ToggleViewBtn.IsVisible = true;
@@ -52,7 +56,7 @@ public partial class Home : ContentPage
                 ToEmployeesBtn.IsVisible = false;
             }
 
-            HomeFrame.Content = tablesPage;
+            HomeFrame.Content = new Tables(this.employee, this.requestServiceStates, this.easyServerRepository);
             DisplayEmployeeGreeting();
 
             ToggleViewBtn.IsVisible = false;
@@ -65,17 +69,17 @@ public partial class Home : ContentPage
 
     private void NavigateToTables(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Tables(employee, queuePages, requestServicePages, easyServerRepository);
+        HomeFrame.Content = new Tables(employee, requestServiceStates, easyServerRepository);
     }
 
     private void NavigateToQueue(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = queuePages.Where(x => x.Employee.EmployeeId == employee.EmployeeId).FirstOrDefault();
+        HomeFrame.Content = new Pages.Queue(employee, easyServerRepository.ServerQueues, requestServiceStates);
     }
 
     private void NavigateToEmployees(object sender, System.EventArgs e)
     {
-        HomeFrame.Content = new Employees(employee, queuePages, requestServicePages, easyServerRepository);
+        HomeFrame.Content = new Employees(employee, requestServiceStates, easyServerRepository);
     }
 
     private async void SignOut(object sender, System.EventArgs e)
@@ -149,15 +153,17 @@ public partial class Home : ContentPage
 
     private void ToggleView(object sender, System.EventArgs e)
     {
+        Employee tableServer = easyServerRepository.GetEmployeeById((int)table.EmployeeId);       
+        
         if (ToggleViewBtn.Text == "View Queue")
         {
-            HomeFrame.Content = queuePages.Where(x => x.Employee.EmployeeId == table.EmployeeId).FirstOrDefault();
-            
+            HomeFrame.Content = new Pages.Queue(tableServer, easyServerRepository.ServerQueues, requestServiceStates);
             ToggleViewBtn.Text = "Request Service";
         }
         else
         {
-            HomeFrame.Content = requestServicePages.Where(x => x.Table.TableId == table.TableId).FirstOrDefault();
+            Pages.Queue queuePage = new(tableServer, easyServerRepository.ServerQueues, requestServiceStates);
+            HomeFrame.Content = new RequestService(table, queuePage, requestServiceStates, easyServerRepository);
 
             ToggleViewBtn.Text = "View Queue";
         }

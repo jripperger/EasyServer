@@ -11,7 +11,7 @@ namespace EasyServerApp
     public class ServerQueue
     {
         private List<RestaurantTable> serverQueue;
-        public List<RestaurantTable> Queue { get { return serverQueue; } private set { serverQueue = value; } }
+        public List<RestaurantTable> Queue { get { return serverQueue; } set { serverQueue = value; } }
 
         private Employee employee;
         public Employee Employee { get { return employee; } private set { employee = value; } }

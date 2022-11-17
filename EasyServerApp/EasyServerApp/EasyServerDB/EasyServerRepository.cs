@@ -21,14 +21,14 @@ namespace EasyServerApp.EasyServerDB
         private List<RestaurantTable> tables;
         public List<RestaurantTable> RestaurantTables { get { return tables; } private set { tables = value; } }
 
-        private HashSet<ServerQueue> serverQueues;
-        public HashSet<ServerQueue> ServerQueues { get { return serverQueues; } private set { serverQueues = value; } }
+        private List<ServerQueue> serverQueues;
+        public List<ServerQueue> ServerQueues { get { return serverQueues; } set { serverQueues = value; } }
 
         public EasyServerRepository()
         {
             employees = GetEmployeeList();
             tables = GetTableList();
-            serverQueues = new HashSet<ServerQueue>();
+            serverQueues = new List<ServerQueue>();
 
             for (int i = 0; i < employees.Count; i++)
             {

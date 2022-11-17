@@ -6,19 +6,18 @@ namespace EasyServerApp.Pages;
 public partial class Login : ContentView
 {
     private EasyServerRepository easyServerRepository;
-    private HashSet<Pages.Queue> queuePages;
-    private HashSet<RequestService> requestServicePages;
 
-    public Login(HashSet<Pages.Queue> queuePages, HashSet<RequestService> requestServicePages, EasyServerRepository easyServerRepository)
+    private Hashtable requestServiceStates;
+
+    public Login(Hashtable requestServiceStates, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
-
-        this.queuePages = queuePages;
-        this.requestServicePages = requestServicePages;
+        
+        this.requestServiceStates = requestServiceStates;
         this.easyServerRepository = easyServerRepository;
     }
 
-    private void AuthenticateUser(object sender, System.EventArgs e)
+    private async void AuthenticateUser(object sender, System.EventArgs e)
     {
         string username = UsernameField.Text;
         string password = PasswordField.Text;
@@ -40,8 +39,6 @@ public partial class Login : ContentView
                 formattedEmployee.Password = formattedEmployee.Password.Trim();
                 formattedEmployee.Role = formattedEmployee.Role.Trim();
 
-                Tables tablesPage = new(formattedEmployee, queuePages, requestServicePages, easyServerRepository);
-
                 if (TableIDField.IsVisible == true)
                 {
                     if (formattedEmployee.Role == "Manager")
@@ -53,9 +50,8 @@ public partial class Login : ContentView
                         {
                             if (table.EmployeeId.HasValue)
                             {
-                                ContentPage home = new Home(formattedEmployee, tablesPage, table, queuePages, requestServicePages, easyServerRepository);
-                                Task task = new(() => { Navigation.PushAsync(home); });
-                                task.RunSynchronously();
+                                ContentPage home = new Home(formattedEmployee, table, requestServiceStates, easyServerRepository);
+                                await Navigation.PushAsync(home);
                             }
                             else
                             {
@@ -74,9 +70,8 @@ public partial class Login : ContentView
                 }
                 else
                 {
-                    ContentPage home = new Home(formattedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-                    Task task = new(() => { Navigation.PushAsync(home); });
-                    task.RunSynchronously();
+                    ContentPage home = new Home(formattedEmployee, null, requestServiceStates, easyServerRepository);
+                    await Navigation.PushAsync(home);
                 }
             }
             else
@@ -162,6 +157,7 @@ public partial class Login : ContentView
         Divider2.IsVisible = true;
         UsernameField.IsVisible = true;
         PasswordField.IsVisible = true;
+        LoginBtn.IsVisible = true;
 
         FirstNameField.IsVisible = false;
         LastNameField.IsVisible = false;
@@ -179,7 +175,7 @@ public partial class Login : ContentView
         Warning.Text = "";
     }
 
-    private void CreateAccount(object sender, System.EventArgs e)
+    private async void CreateAccount(object sender, System.EventArgs e)
     {
         string firstName = FirstNameField.Text;
         string lastName = LastNameField.Text;
@@ -213,15 +209,10 @@ public partial class Login : ContentView
 
             ServerQueue serverQueue = easyServerRepository.ServerQueues.Where(x => x.Employee.EmployeeId == insertedEmployee.EmployeeId).FirstOrDefault();
 
-            // Create a new queue page for the employee
-            Pages.Queue queuePage = new(insertedEmployee, serverQueue, requestServicePages);
-            queuePages.Add(queuePage);
+            Tables tablesPage = new(insertedEmployee, requestServiceStates, easyServerRepository);
 
-            Tables tablesPage = new(insertedEmployee, queuePages, requestServicePages, easyServerRepository);
-
-            ContentPage home = new Home(insertedEmployee, tablesPage, null, queuePages, requestServicePages, easyServerRepository);
-            Task task = new(() => { Navigation.PushAsync(home); });
-            task.RunSynchronously();
+            ContentPage home = new Home(insertedEmployee, null, requestServiceStates, easyServerRepository);
+            await Navigation.PushAsync(home);
 
             GetLgnAccFields();
         }

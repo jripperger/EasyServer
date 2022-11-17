@@ -6,23 +6,36 @@ namespace EasyServerApp.Pages;
 public partial class Queue : ContentView
 {
     private Employee employee;
+    private List<ServerQueue> serverQueues;
     private ServerQueue serverQueue;
     private List<Button> serviceButtons;
-    private HashSet<RequestService> requestServicePages;
+    private Hashtable requestServiceStates;
+    private bool isEmpty;
 
     public Employee Employee { get { return employee; } }
 
-    public Queue(Employee employee, ServerQueue serverQueue, HashSet<RequestService> requestServicePages)
+    public Queue(Employee employee, List<ServerQueue> serverQueues, Hashtable requestServiceStates)
 	{
 		InitializeComponent();
 
         this.employee = employee;
-        this.serverQueue = serverQueue;
-        this.requestServicePages = requestServicePages;
+        this.serverQueues = serverQueues;
+        this.requestServiceStates = requestServiceStates;
 
-        serviceButtons= new List<Button>();
+        serverQueue = this.serverQueues.Where(x => x.Employee.EmployeeId == this.employee.EmployeeId).FirstOrDefault();
+
+        serviceButtons = new List<Button>();
+
+        if (serverQueue.Queue.Count == 0)
+        {
+            QueueContentsLbl.IsVisible = true;
+        }
+        else
+        {
+            QueueContentsLbl.IsVisible = false;
+        }
   
-        QueueLbl.Text = employee.FirstName + " " + employee.LastName + "'s Queue";
+        QueueLbl.Text = employee.FirstName.Trim() + " " + employee.LastName.Trim() + "'s Queue";
 
         GenerateGridContents();
     }
@@ -30,6 +43,8 @@ public partial class Queue : ContentView
     public void GenerateGridContents()
     {
         GenerateGridLayout();
+
+        ServerQueue serverQueue = serverQueues.Where(x => x.Employee.EmployeeId == employee.EmployeeId).FirstOrDefault();
 
         for (int i = 0; i < serverQueue.Queue.Count; i++)
         {
@@ -47,7 +62,7 @@ public partial class Queue : ContentView
                 button.IsEnabled = false;
             }
 
-            button.Clicked += new EventHandler(serveTable);
+            button.Clicked += new EventHandler(ServeTable);
 
             serviceButtons.Add(button);
             QueueGrid.Add(button);
@@ -58,7 +73,7 @@ public partial class Queue : ContentView
 
     private void GenerateGridLayout()
     {
-        int rows = serverQueue.Queue.Count;
+        int rows = serverQueues.Where(x => x.Employee.EmployeeId == employee.EmployeeId).FirstOrDefault().Queue.Count;
 
         for (int i = 0; i < rows; i++)
         {
@@ -67,9 +82,10 @@ public partial class Queue : ContentView
         }
     }
 
-    private void serveTable(object sender, System.EventArgs e)
+    private void ServeTable(object sender, System.EventArgs e)
     {
-        requestServicePages.Where(x => x.Table.TableId == serverQueue.Queue.FirstOrDefault().TableId).FirstOrDefault().ToggleServer();
+        requestServiceStates[serverQueue.Queue.FirstOrDefault().TableId] = false;
+        serverQueues.Where(x => x.Employee.EmployeeId == serverQueue.Queue.FirstOrDefault().EmployeeId).FirstOrDefault().Queue.Remove(serverQueue.Queue.FirstOrDefault());
 
         ToggleQueueContentsLbl();
         ClearQueueGrid();
@@ -78,7 +94,7 @@ public partial class Queue : ContentView
 
     public void ToggleQueueContentsLbl()
     {
-        if (serverQueue.Queue.Count == 0)
+        if (serverQueues.Where(x => x.Employee.EmployeeId == employee.EmployeeId).FirstOrDefault().Queue.Count == 0)
         {
             QueueContentsLbl.IsVisible = true;
         }
@@ -90,6 +106,14 @@ public partial class Queue : ContentView
 
     public void ClearQueueGrid()
     {
+        QueueGrid.RowDefinitions.Clear();
+        QueueGrid.ColumnDefinitions.Clear();
         QueueGrid.Clear();
+    }
+
+    public object Convert(object value, Type targetType, object parameter, string language)
+    {
+        Visibility isVisible = (Visibility)value;
+        return isVisible;
     }
 }

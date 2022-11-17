@@ -29,25 +29,25 @@
     <AppXManifest Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-11-17T02:01:00.499</Modified>
+      <Modified>2022-11-17T09:17:26.844</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2022-11-17T01:50:29.932</Modified>
+      <Modified>2022-11-17T09:17:26.609</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\EasyServerApp.runtimeconfig.json">
       <PackagePath>EasyServerApp.runtimeconfig.json</PackagePath>
-      <Modified>2022-11-17T01:55:23.475</Modified>
+      <Modified>2022-11-17T07:17:25.275</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\EasyServerApp.dll">
       <PackagePath>EasyServerApp.dll</PackagePath>
-      <Modified>2022-11-17T02:00:59.639</Modified>
+      <Modified>2022-11-17T09:17:25.998</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>EasyServerApp.exe</PackagePath>
-      <Modified>2022-11-17T02:00:59.642</Modified>
+      <Modified>2022-11-17T09:17:26.011</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1019,7 +1019,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\EasyServerApp.deps.json">
       <PackagePath>EasyServerApp.deps.json</PackagePath>
-      <Modified>2022-11-17T02:01:00.400</Modified>
+      <Modified>2022-11-17T09:17:26.769</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
@@ -1039,23 +1039,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.774</Modified>
+      <Modified>2022-11-17T07:14:26.864</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.784</Modified>
+      <Modified>2022-11-17T07:14:26.872</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.799</Modified>
+      <Modified>2022-11-17T07:14:26.888</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.818</Modified>
+      <Modified>2022-11-17T07:14:26.910</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.893</Modified>
+      <Modified>2022-11-17T07:14:26.982</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
@@ -1067,207 +1067,207 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2022-11-17T01:50:27.924</Modified>
+      <Modified>2022-11-17T07:14:26.994</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.087</Modified>
+      <Modified>2022-11-17T07:14:27.155</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.094</Modified>
+      <Modified>2022-11-17T07:14:27.163</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.100</Modified>
+      <Modified>2022-11-17T07:14:27.169</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.110</Modified>
+      <Modified>2022-11-17T07:14:27.179</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.154</Modified>
+      <Modified>2022-11-17T07:14:27.216</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.975</Modified>
+      <Modified>2022-11-17T07:14:27.041</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.977</Modified>
+      <Modified>2022-11-17T07:14:27.043</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.986</Modified>
+      <Modified>2022-11-17T07:14:27.051</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.979</Modified>
+      <Modified>2022-11-17T07:14:27.046</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.981</Modified>
+      <Modified>2022-11-17T07:14:27.047</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.960</Modified>
+      <Modified>2022-11-17T07:14:27.028</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.963</Modified>
+      <Modified>2022-11-17T07:14:27.030</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.972</Modified>
+      <Modified>2022-11-17T07:14:27.038</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.965</Modified>
+      <Modified>2022-11-17T07:14:27.032</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.967</Modified>
+      <Modified>2022-11-17T07:14:27.034</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.933</Modified>
+      <Modified>2022-11-17T07:14:27.003</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.936</Modified>
+      <Modified>2022-11-17T07:14:27.005</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.937</Modified>
+      <Modified>2022-11-17T07:14:27.007</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.940</Modified>
+      <Modified>2022-11-17T07:14:27.009</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.943</Modified>
+      <Modified>2022-11-17T07:14:27.014</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.946</Modified>
+      <Modified>2022-11-17T07:14:27.016</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.949</Modified>
+      <Modified>2022-11-17T07:14:27.018</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.958</Modified>
+      <Modified>2022-11-17T07:14:27.026</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.951</Modified>
+      <Modified>2022-11-17T07:14:27.021</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.953</Modified>
+      <Modified>2022-11-17T07:14:27.023</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.019</Modified>
+      <Modified>2022-11-17T07:14:27.081</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.023</Modified>
+      <Modified>2022-11-17T07:14:27.085</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.028</Modified>
+      <Modified>2022-11-17T07:14:27.089</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.034</Modified>
+      <Modified>2022-11-17T07:14:27.094</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.044</Modified>
+      <Modified>2022-11-17T07:14:27.103</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.002</Modified>
+      <Modified>2022-11-17T07:14:27.064</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.005</Modified>
+      <Modified>2022-11-17T07:14:27.067</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.007</Modified>
+      <Modified>2022-11-17T07:14:27.069</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.009</Modified>
+      <Modified>2022-11-17T07:14:27.072</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.017</Modified>
+      <Modified>2022-11-17T07:14:27.078</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.989</Modified>
+      <Modified>2022-11-17T07:14:27.054</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.991</Modified>
+      <Modified>2022-11-17T07:14:27.056</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.994</Modified>
+      <Modified>2022-11-17T07:14:27.057</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.997</Modified>
+      <Modified>2022-11-17T07:14:27.059</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.001</Modified>
+      <Modified>2022-11-17T07:14:27.062</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.047</Modified>
+      <Modified>2022-11-17T07:14:27.107</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.051</Modified>
+      <Modified>2022-11-17T07:14:27.111</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.056</Modified>
+      <Modified>2022-11-17T07:14:27.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.064</Modified>
+      <Modified>2022-11-17T07:14:27.124</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.081</Modified>
+      <Modified>2022-11-17T07:14:27.150</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.954</Modified>
+      <Modified>2022-11-17T07:14:26.995</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.962</Modified>
+      <Modified>2022-11-17T07:14:27.003</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.970</Modified>
+      <Modified>2022-11-17T07:14:27.011</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2022-11-17T01:50:27.986</Modified>
+      <Modified>2022-11-17T07:14:27.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2022-11-17T01:50:28.017</Modified>
+      <Modified>2022-11-17T07:14:27.054</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
