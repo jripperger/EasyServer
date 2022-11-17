@@ -9,8 +9,8 @@ public partial class MainPage : ContentPage
     private EasyServerRepository _easyServerRepository;
     public EasyServerRepository easyServerRepository { get { return _easyServerRepository; }  }
 
-    private Hashtable queuePages;
-    private Hashtable requestServicePages;
+    private HashSet<Pages.Queue> queuePages;
+    private HashSet<RequestService> requestServicePages;
 
     public MainPage()
 	{
@@ -18,7 +18,9 @@ public partial class MainPage : ContentPage
         CreateAPI();
         CreatePages();
 
-		MainFrame.Content = new Login(queuePages, requestServicePages, easyServerRepository);
+        List<RestaurantTable> tables = easyServerRepository.RestaurantTables;
+
+        MainFrame.Content = new Login(queuePages, requestServicePages, easyServerRepository);
     }
 
     private EasyServerRepository CreateAPI()
@@ -38,12 +40,12 @@ public partial class MainPage : ContentPage
 
         if (queuePages == null)
         {
-            queuePages = new Hashtable();
+            queuePages = new HashSet<Pages.Queue>();
         }
 
         if (requestServicePages == null)
         {
-            requestServicePages = new Hashtable();
+            requestServicePages = new HashSet<RequestService>();
         }
 
         for (int i = 0; i< employees.Count; i++)
@@ -55,22 +57,23 @@ public partial class MainPage : ContentPage
             formattedEmployee.Password = formattedEmployee.Password.Trim();
             formattedEmployee.Role = formattedEmployee.Role.Trim();
 
-            List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue(formattedEmployee.EmployeeId);
+            ServerQueue serverQueue = easyServerRepository.GetServerQueue(formattedEmployee.EmployeeId);
             Pages.Queue queuePage = new(formattedEmployee, serverQueue, requestServicePages);
-            queuePages.Add(employees[i].EmployeeId, queuePage);
+            queuePages.Add(queuePage);
         }
 
         for (int i = 0; i < tables.Count; i++)
         {
             if (tables[i].EmployeeId.HasValue)
-            { 
-                RequestService requestServicePage = new(tables[i], (Pages.Queue)queuePages[tables[i].EmployeeId], easyServerRepository);
-                requestServicePages.Add(tables[i].TableId, requestServicePage);
+            {
+                Pages.Queue queuePage = queuePages.Where(x => x.Employee.EmployeeId == tables[i].EmployeeId).FirstOrDefault();
+                RequestService requestServicePage = new(tables[i], queuePage, easyServerRepository);
+                requestServicePages.Add(requestServicePage);
             }
             else
             {
                 RequestService requestServicePage = new(tables[i], null, easyServerRepository);
-                requestServicePages.Add(tables[i].TableId, requestServicePage);
+                requestServicePages.Add(requestServicePage);
             }                    
         }
     }

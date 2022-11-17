@@ -6,11 +6,13 @@ namespace EasyServerApp.Pages;
 public partial class Queue : ContentView
 {
     private Employee employee;
-    private List<RestaurantTable> serverQueue;
+    private ServerQueue serverQueue;
     private List<Button> serviceButtons;
-    private Hashtable requestServicePages;
+    private HashSet<RequestService> requestServicePages;
 
-    public Queue(Employee employee, List<RestaurantTable> serverQueue, Hashtable requestServicePages)
+    public Employee Employee { get { return employee; } }
+
+    public Queue(Employee employee, ServerQueue serverQueue, HashSet<RequestService> requestServicePages)
 	{
 		InitializeComponent();
 
@@ -29,11 +31,11 @@ public partial class Queue : ContentView
     {
         GenerateGridLayout();
 
-        for (int i = 0; i < serverQueue.Count; i++)
+        for (int i = 0; i < serverQueue.Queue.Count; i++)
         {
             var button = new Button
             {
-                Text = "Table " + serverQueue[i].TableId.ToString()
+                Text = "Table " + serverQueue.Queue[i].TableId.ToString()
             };
 
             if (i == 0)
@@ -56,7 +58,7 @@ public partial class Queue : ContentView
 
     private void GenerateGridLayout()
     {
-        int rows = serverQueue.Count;
+        int rows = serverQueue.Queue.Count;
 
         for (int i = 0; i < rows; i++)
         {
@@ -67,7 +69,7 @@ public partial class Queue : ContentView
 
     private void serveTable(object sender, System.EventArgs e)
     {
-        ((RequestService)requestServicePages[serverQueue.FirstOrDefault().TableId]).ToggleServer();
+        requestServicePages.Where(x => x.Table.TableId == serverQueue.Queue.FirstOrDefault().TableId).FirstOrDefault().ToggleServer();
 
         ToggleQueueContentsLbl();
         ClearQueueGrid();
@@ -76,7 +78,7 @@ public partial class Queue : ContentView
 
     public void ToggleQueueContentsLbl()
     {
-        if (serverQueue.Count == 0)
+        if (serverQueue.Queue.Count == 0)
         {
             QueueContentsLbl.IsVisible = true;
         }

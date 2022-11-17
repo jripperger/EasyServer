@@ -7,14 +7,14 @@ namespace EasyServerApp.Pages;
 public partial class Employees : ContentView
 {
     private EasyServerRepository easyServerRepository;
-    private Hashtable queuePages;
-    private Hashtable requestServicePages;
+    private HashSet<Pages.Queue> queuePages;
+    private HashSet<RequestService> requestServicePages;
     private List<Label> labels;
     private List<Picker> pickers;
     private List<Button> buttons;
     private Employee employee;
 
-    public Employees(Employee employee, Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
+    public Employees(Employee employee, HashSet<Pages.Queue> queuePages, HashSet<RequestService> requestServicePages, EasyServerRepository easyServerRepository)
 	{
 		InitializeComponent();
 
@@ -121,8 +121,11 @@ public partial class Employees : ContentView
     {
         for (int i = 0; i < 6; i++)
         {
-            ColumnDefinition columnDefinition = new();
-            columnDefinition.Width = 250;
+            ColumnDefinition columnDefinition = new()
+            {
+                Width = 250
+            };
+
             EmployeesGrid.AddColumnDefinition(columnDefinition);
         }
 
@@ -163,13 +166,13 @@ public partial class Employees : ContentView
         int employeeID = int.Parse(button.ClassId);
         Employee removedEmployee = easyServerRepository.DeleteEmployeeRow(employeeID);
 
-        queuePages.Remove(removedEmployee.EmployeeId);
+        queuePages.Remove(queuePages.Where(x => x.Employee.EmployeeId == removedEmployee.EmployeeId).FirstOrDefault());
 
         for (int i = 0; i < easyServerRepository.RestaurantTables.Count; i++)
         {
-            if (((RequestService)requestServicePages[easyServerRepository.RestaurantTables[i].TableId]).TableServerID == employeeID)
+            if (requestServicePages.Where(x => x.Table.TableId == easyServerRepository.RestaurantTables[i].TableId).FirstOrDefault().TableServerID == employeeID)
             {
-                ((RequestService)requestServicePages[easyServerRepository.RestaurantTables[i].TableId]).TableServerID = null;
+                requestServicePages.Where(x => x.Table.TableId == easyServerRepository.RestaurantTables[i].TableId).FirstOrDefault().TableServerID = null;
             }
         }
 

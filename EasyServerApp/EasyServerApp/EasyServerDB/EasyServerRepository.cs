@@ -21,32 +21,28 @@ namespace EasyServerApp.EasyServerDB
         private List<RestaurantTable> tables;
         public List<RestaurantTable> RestaurantTables { get { return tables; } private set { tables = value; } }
 
-        private Hashtable serverQueues;
-        public Hashtable ServerQueues { get { return serverQueues; } private set { serverQueues = value; } }
+        private HashSet<ServerQueue> serverQueues;
+        public HashSet<ServerQueue> ServerQueues { get { return serverQueues; } private set { serverQueues = value; } }
 
         public EasyServerRepository()
         {
             employees = GetEmployeeList();
             tables = GetTableList();
-            serverQueues = new Hashtable();
+            serverQueues = new HashSet<ServerQueue>();
 
             for (int i = 0; i < employees.Count; i++)
             {
                 List<RestaurantTable> queue = new();
-                serverQueues.Add(employees[i].EmployeeId, queue);
+                ServerQueue serverQueue = new(employees[i], queue);
+                serverQueues.Add(serverQueue);
             }
         }
 
-        public List<RestaurantTable> GetServerQueue(int id)
+        public ServerQueue GetServerQueue(int id)
         {
-            if (serverQueues.ContainsKey(id)) 
-            {
-                return (List<RestaurantTable>)serverQueues[id];
-            }
-            else
-            {
-                return null;
-            }
+            ServerQueue serverQueue = serverQueues.Where(x => x.Employee.EmployeeId == id).FirstOrDefault();
+
+            return serverQueue;
         }
 
         public List<Employee> GetEmployeeList()
@@ -69,7 +65,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.Employee.Where(x => (x.EmployeeId == id)).FirstOrDefault();
+                return context.Employee.Where(x => x.EmployeeId == id).FirstOrDefault();
             }
         }
 
@@ -77,7 +73,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.Employee.Where(x => (x.Username == username && x.Password == password)).FirstOrDefault();
+                return context.Employee.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
             }              
         }
 
@@ -85,7 +81,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.Employee.Where(x => (x.FirstName == firstName && x.LastName == lastName)).FirstOrDefault();
+                return context.Employee.Where(x => x.FirstName == firstName && x.LastName == lastName).FirstOrDefault();
             }
         }
 
@@ -93,7 +89,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.Employee.Where(x => (x.Username == username)).FirstOrDefault();
+                return context.Employee.Where(x => x.Username == username).FirstOrDefault();
             }
         }
 
@@ -101,7 +97,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.Employee.Where(x => (x.Password == password)).FirstOrDefault();
+                return context.Employee.Where(x => x.Password == password).FirstOrDefault();
             }
         }
 
@@ -122,10 +118,13 @@ namespace EasyServerApp.EasyServerDB
                 context.SaveChanges();
                 Employees = GetEmployeeList();
 
-                List<RestaurantTable> queue = new();
-                ServerQueues.Add(context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault().EmployeeId, queue);
+                newEmployee = context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault();
 
-                return context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault();
+                List<RestaurantTable> queue = new();
+                ServerQueue serverQueue = new(newEmployee, queue);
+                ServerQueues.Add(serverQueue);
+
+                return newEmployee;
             }
         }
 
@@ -133,7 +132,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                Employee employee = context.Employee.Where(x => (x.EmployeeId == employeeID)).FirstOrDefault();
+                Employee employee = context.Employee.Where(x => x.EmployeeId == employeeID).FirstOrDefault();
 
                 if (employee != null)
                 {
@@ -151,7 +150,8 @@ namespace EasyServerApp.EasyServerDB
                     context.SaveChanges();
                     Employees = GetEmployeeList();
 
-                    serverQueues.Remove(employeeID);
+                    ServerQueue serverQueue = ServerQueues.Where(x => x.Employee.EmployeeId == employeeID).FirstOrDefault();
+                    ServerQueues.Remove(serverQueue);
                 }
 
                 return employee;
@@ -180,7 +180,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                RestaurantTable table = context.RestaurantTable.Where(x => (x.TableId == tableID)).FirstOrDefault();
+                RestaurantTable table = context.RestaurantTable.Where(x => x.TableId == tableID).FirstOrDefault();
 
                 if (table != null)
                 {
@@ -199,7 +199,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.RestaurantTable.Where(x => (x.TableId == id)).FirstOrDefault();
+                return context.RestaurantTable.Where(x => x.TableId == id).FirstOrDefault();
             }
         }
 
@@ -207,7 +207,7 @@ namespace EasyServerApp.EasyServerDB
         {
             using (var context = new EasyServerContext())
             {
-                return context.RestaurantTable.Where(x => (x.Qrcode == qrCode)).FirstOrDefault();
+                return context.RestaurantTable.Where(x => x.Qrcode == qrCode).FirstOrDefault();
             }
         }
 

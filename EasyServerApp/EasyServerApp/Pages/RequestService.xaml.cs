@@ -30,16 +30,16 @@ public partial class RequestService : ContentView
 
     public void ToggleServer()
     {
-        List<RestaurantTable> serverQueue = easyServerRepository.GetServerQueue((int)TableServerID);
+        ServerQueue serverQueue = easyServerRepository.GetServerQueue((int)TableServerID);
 
         if (ReqServerBtn.Text == "Request Server")
         {
-            serverQueue.Add(table);
+            serverQueue.Queue.Add(table);
             ReqServerBtn.Text = "Cancel Server Request";
         } 
         else
         {
-            serverQueue.Remove(table);
+            serverQueue.Queue.Remove(table);
             ReqServerBtn.Text = "Request Server";
         }
 

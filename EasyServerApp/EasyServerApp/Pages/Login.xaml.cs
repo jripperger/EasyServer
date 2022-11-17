@@ -6,10 +6,10 @@ namespace EasyServerApp.Pages;
 public partial class Login : ContentView
 {
     private EasyServerRepository easyServerRepository;
-    private Hashtable queuePages;
-    private Hashtable requestServicePages;
+    private HashSet<Pages.Queue> queuePages;
+    private HashSet<RequestService> requestServicePages;
 
-    public Login(Hashtable queuePages, Hashtable requestServicePages, EasyServerRepository easyServerRepository)
+    public Login(HashSet<Pages.Queue> queuePages, HashSet<RequestService> requestServicePages, EasyServerRepository easyServerRepository)
     {
         InitializeComponent();
 
@@ -211,11 +211,11 @@ public partial class Login : ContentView
             insertedEmployee.Password = insertedEmployee.Password.Trim();
             insertedEmployee.Role = insertedEmployee.Role.Trim();
 
-            List<RestaurantTable> serverQueue = (List<RestaurantTable>)easyServerRepository.ServerQueues[insertedEmployee.EmployeeId];
+            ServerQueue serverQueue = easyServerRepository.ServerQueues.Where(x => x.Employee.EmployeeId == insertedEmployee.EmployeeId).FirstOrDefault();
 
             // Create a new queue page for the employee
             Pages.Queue queuePage = new(insertedEmployee, serverQueue, requestServicePages);
-            queuePages.Add(insertedEmployee.EmployeeId, queuePage);
+            queuePages.Add(queuePage);
 
             Tables tablesPage = new(insertedEmployee, queuePages, requestServicePages, easyServerRepository);
 
