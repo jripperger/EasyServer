@@ -208,7 +208,7 @@ public partial class Tables : ContentView
                     requestServiceStates[restaurantTables[i].TableId] = false;
                     easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
 
-                    labels[i].Text = restaurantTables[i].TableId + ": " + employeeName;
+                    labels[i].Text = "Table " + restaurantTables[i].TableId + ": " + employeeName;
                 }
 
                 pickers[i].SelectedItem = null;
@@ -247,20 +247,43 @@ public partial class Tables : ContentView
         GenerateGridContents();
     }
 
-    private void DeleteTable(object sender, System.EventArgs e)
+    private async void DeleteTable(object sender, System.EventArgs e)
     {
         Button button = (Button)sender;
         int tableID = int.Parse(button.ClassId);
-        RestaurantTable removedTable = easyServerRepository.DeleteRestaurantTableRow(tableID);
 
-        requestServiceStates.Remove(removedTable.TableId);
+        ContentPage homePage = (ContentPage)Parent.Parent.Parent;
+        bool answer = await homePage.DisplayAlert("Warning", "Are you sure you would like to delete Table " + tableID + "?", "Yes", "No");
 
-        labels.Clear();
-        pickers.Clear();
-        buttons.Clear();
-        TablesGrid.Clear();
-        TablesGrid.RowDefinitions.Clear();
-        TablesGrid.ColumnDefinitions.Clear();
-        GenerateGridContents();
+        if (answer == true)
+        {
+            RestaurantTable removedTable = easyServerRepository.DeleteRestaurantTableRow(tableID);
+
+            requestServiceStates.Remove(removedTable.TableId);
+
+            if (removedTable.EmployeeId != null)
+            {
+                ServerQueue serverQueue = easyServerRepository.ServerQueues.Where(x => x.Employee.EmployeeId == removedTable.EmployeeId).FirstOrDefault();
+                List<RestaurantTable> newQueue = new();
+
+                for (int i = 0; i < serverQueue.Queue.Count; i++)
+                {
+                    if (serverQueue.Queue[i].TableId != removedTable.TableId)
+                    {
+                        newQueue.Add(serverQueue.Queue[i]);
+                    }
+                }
+                
+                easyServerRepository.ServerQueues.Where(x => x.Employee.EmployeeId == removedTable.EmployeeId).FirstOrDefault().Queue = newQueue;
+            }
+            
+            labels.Clear();
+            pickers.Clear();
+            buttons.Clear();
+            TablesGrid.Clear();
+            TablesGrid.RowDefinitions.Clear();
+            TablesGrid.ColumnDefinitions.Clear();
+            GenerateGridContents();
+        }      
     }
 }

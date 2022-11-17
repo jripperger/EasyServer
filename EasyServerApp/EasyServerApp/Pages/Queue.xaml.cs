@@ -50,7 +50,8 @@ public partial class Queue : ContentView
         {
             var button = new Button
             {
-                Text = "Table " + serverQueue.Queue[i].TableId.ToString()
+                Text = "Table " + serverQueue.Queue[i].TableId.ToString(),
+                WidthRequest = 150
             };
 
             if (i == 0)

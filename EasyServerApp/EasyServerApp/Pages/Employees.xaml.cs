@@ -157,26 +157,34 @@ public partial class Employees : ContentView
         }
     }
 
-    private void DeleteEmployee(object sender, System.EventArgs e)
+    private async void DeleteEmployee(object sender, System.EventArgs e)
     {
         Button button = (Button)sender;
         int employeeID = int.Parse(button.ClassId);
-        easyServerRepository.DeleteEmployeeRow(employeeID);
+        Employee employee = easyServerRepository.GetEmployeeById(employeeID);
 
-        for (int i = 0; i < easyServerRepository.RestaurantTables.Count; i++)
+        ContentPage homePage = (ContentPage)Parent.Parent.Parent;
+        bool answer = await homePage.DisplayAlert("Warning", "Are you sure you would like to delete " + employee.FirstName.Trim() + " " + employee.LastName.Trim() + "?", "Yes", "No");
+
+        if (answer == true)
         {
-            if (easyServerRepository.RestaurantTables[i].EmployeeId == employeeID)
-            {
-                requestServiceStates[easyServerRepository.RestaurantTables[i].TableId] = false;
-            }
-        }
+            easyServerRepository.DeleteEmployeeRow(employeeID);
 
-        labels.Clear();
-        pickers.Clear();
-        buttons.Clear();
-        EmployeesGrid.Clear();
-        EmployeesGrid.RowDefinitions.Clear();
-        EmployeesGrid.ColumnDefinitions.Clear();
-        GenerateGridContents();
+            for (int i = 0; i < easyServerRepository.RestaurantTables.Count; i++)
+            {
+                if (easyServerRepository.RestaurantTables[i].EmployeeId == employeeID)
+                {
+                    requestServiceStates[easyServerRepository.RestaurantTables[i].TableId] = false;
+                }
+            }
+
+            labels.Clear();
+            pickers.Clear();
+            buttons.Clear();
+            EmployeesGrid.Clear();
+            EmployeesGrid.RowDefinitions.Clear();
+            EmployeesGrid.ColumnDefinitions.Clear();
+            GenerateGridContents();
+        }
     }
 }
