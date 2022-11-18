@@ -109,6 +109,8 @@ public partial class Tables : ContentView
                     HorizontalOptions = LayoutOptions.Center
                 };
 
+                picker.Items.Add("N/A");
+
                 for (int x = 0; x < employees.Count; x++)
                 {
                     picker.Items.Add(employees[x].FirstName.Trim() + " " + employees[x].LastName.Trim() + " [" + employees[x].EmployeeId + "]");
@@ -187,28 +189,35 @@ public partial class Tables : ContentView
 
     private void SaveServers(object sender, System.EventArgs e)
     {
-        List<RestaurantTable> restaurantTables = easyServerRepository.RestaurantTables;
-
         for (int i = 0; i < pickers.Count; i++)
         {
             if (pickers[i].SelectedItem != null)
             {
+                int tableID = int.Parse(pickers[i].ClassId);
                 string employeeName = pickers[i].SelectedItem.ToString();
 
-                int firstNameIndex = employeeName.IndexOf(" ");
-                int lastNameIndex = employeeName.IndexOf("[") - 1;
-
-                string firstName = employeeName.Substring(0, firstNameIndex);
-                string lastName = employeeName.Substring(firstNameIndex + 1, lastNameIndex - firstNameIndex - 1);
-
-                Employee employee = easyServerRepository.GetEmployeeByName(firstName, lastName);
-
-                if (restaurantTables[i].EmployeeId != employee.EmployeeId)
+                if (employeeName == "N/A")
                 {
-                    requestServiceStates[restaurantTables[i].TableId] = false;
-                    easyServerRepository.UpdateTableServer(restaurantTables[i].TableId, employee.EmployeeId);
+                    labels[i].Text = "Table " + tableID + ": Not assigned";
+                    easyServerRepository.UpdateTableServer(tableID, null);
+                }
+                else
+                {
+                    int idStart = employeeName.IndexOf("[") + 1;
+                    int idEnd = employeeName.IndexOf("]");
 
-                    labels[i].Text = "Table " + restaurantTables[i].TableId + ": " + employeeName;
+                    int employeeeID = int.Parse(employeeName.Substring(idStart, idEnd - idStart));
+
+                    Employee employee = easyServerRepository.GetEmployeeById(employeeeID);
+                    RestaurantTable table = easyServerRepository.GetTableById(tableID);
+
+                    if (table.EmployeeId != employee.EmployeeId)
+                    {
+                        requestServiceStates[table.TableId] = false;
+                        easyServerRepository.UpdateTableServer(tableID, employee.EmployeeId);
+
+                        labels[i].Text = "Table " + tableID + ": " + employeeName;
+                    }
                 }
 
                 pickers[i].SelectedItem = null;

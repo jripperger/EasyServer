@@ -52,6 +52,8 @@ public partial class Login : ContentView
                             {
                                 ContentPage home = new Home(formattedEmployee, table, requestServiceStates, easyServerRepository);
                                 await Navigation.PushAsync(home);
+                                Warning.Text = "";
+                                GetLgnAccFields();
                             }
                             else
                             {
@@ -72,6 +74,8 @@ public partial class Login : ContentView
                 {
                     ContentPage home = new Home(formattedEmployee, null, requestServiceStates, easyServerRepository);
                     await Navigation.PushAsync(home);
+                    Warning.Text = "";
+                    GetLgnAccFields();
                 }
             }
             else
@@ -83,8 +87,6 @@ public partial class Login : ContentView
         UsernameField.Text = "";
         PasswordField.Text = "";
         TableIDField.Text = "";
-
-        GetLgnAccFields();
     }
 
     private void ToggleLgnAccFields(object sender, System.EventArgs e)
@@ -190,13 +192,13 @@ public partial class Login : ContentView
             Password = password
         };
 
-        if (username == null || password == null || firstName == null || lastName == null)
+        if (username == "" || password == "" || firstName == "" || lastName == "")
         {
-            Warning.Text = "You must complete all fields.";
+            Warning.Text = "You must complete all fields";
         }
         else if (easyServerRepository.GetEmployeeByUsername(username) != null)
         {
-            Warning.Text = "This username is already taken.";
+            Warning.Text = "This username is already taken";
         }
         else
         {
@@ -215,6 +217,7 @@ public partial class Login : ContentView
             await Navigation.PushAsync(home);
 
             GetLgnAccFields();
+            Warning.Text = "";
         }
     }
 }

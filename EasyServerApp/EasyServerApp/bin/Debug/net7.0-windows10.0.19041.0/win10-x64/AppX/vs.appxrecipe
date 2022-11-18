@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-11-17T17:38:58.778</Modified>
+      <Modified>2022-11-18T16:06:57.322</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\EasyServerApp.dll">
       <PackagePath>EasyServerApp.dll</PackagePath>
-      <Modified>2022-11-17T17:38:57.914</Modified>
+      <Modified>2022-11-18T16:06:56.503</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>EasyServerApp.exe</PackagePath>
-      <Modified>2022-11-17T17:38:57.918</Modified>
+      <Modified>2022-11-18T16:06:56.516</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -1019,7 +1019,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\EasyServerApp.deps.json">
       <PackagePath>EasyServerApp.deps.json</PackagePath>
-      <Modified>2022-11-17T17:38:58.660</Modified>
+      <Modified>2022-11-18T16:06:57.224</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
