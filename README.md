@@ -3,8 +3,8 @@
 ## Overview
 This application is intended to simplify the job of restaurant servers by implementing a queue to organize customer service.
 
-EasyServer requires the installation of .NET MAUI to one's system. Currently, the application only works on a Windows machine, but other 
-platforms will likely be compatible in the future (i.e. Mac, iOS, and Android). Since this app has only been implemented locally, 
+EasyServer requires the installation of .NET MAUI to one's system. Currently, the application runs exclusively on Windows machines, but other 
+platforms will likely be compatible in the future (i.e. Mac, iOS, and Android). Since this app has just been implemented locally, 
 it is only executable via an IDE; during this application's development process, Visual Studio 2022 Community was used. Furthermore, 
 EasyServer does not utilize a remotely accessible backend server. The database used for testing this app was simply a Microsoft
 SQL Server Express LocalDB. Thus, users must configure their own Database and connect it to the application themselves. The necessary 
