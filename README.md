@@ -14,7 +14,7 @@ database configuration is described below.
 Some variant of SQL Server is needed.
 
 ### Employees table
-Columns: EmployeeId (PK), FirstName, LastName, Username, Password, Role
+Columns: EmployeeId (PK), FirstName, LastName, Username, Password, Role ("Server" or "Manager")
 
 ### RestaurantTables table
 Columns: TableId (PK), QrCode, EmployeeId (FK to Employees table EmployeeId)
