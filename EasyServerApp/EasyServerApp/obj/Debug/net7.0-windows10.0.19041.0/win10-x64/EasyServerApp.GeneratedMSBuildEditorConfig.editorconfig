@@ -1,0 +1,77 @@
+is_global = true
+build_property.TargetFramework = net7.0-windows10.0.19041.0
+build_property.TargetPlatformMinVersion = 10.0.17763.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 9A19103F-16F7-4668-BE54-9A1E7A4F7556
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EasyServerApp
+build_property.ProjectDir = C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Employees.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Employees.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\Employees.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\Employees.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Home.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Home.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\Home.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\Home.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Login.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Login.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\Login.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\Login.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Queue.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Queue.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\Queue.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\Queue.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/RequestService.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.RequestService.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\RequestService.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\RequestService.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Pages/Tables.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Pages.Tables.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\Tables.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\Tables.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[C:/Users/Jacob/Documents/GitHub/EasyServer/EasyServerApp/EasyServerApp/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = EasyServerApp.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml

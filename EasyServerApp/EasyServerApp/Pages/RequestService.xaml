@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyServerApp.Pages.RequestService">
+    <Grid
+        VerticalOptions="Center" 
+        HorizontalOptions="Center"
+        x:Name="RequestServiceGrid"
+        WidthRequest="1750">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label 
+            x:Name="TableLbl"
+            FontSize="Medium"
+            FontAttributes="Bold"
+            Grid.Row="0"
+            Grid.Column="0"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"/>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            x:Name="ReqServerBtn"
+            Text="Request Server"
+            Margin="0, 20, 0, 0"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            WidthRequest="250"
+            Clicked="RequestServer"/>
+    </Grid>
+
+</ContentView>

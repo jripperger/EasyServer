@@ -1,0 +1,1 @@
+C:\Users\Jacob\Documents\GitHub\EasyServer\EasyServerApp\EasyServerApp\EasyServerApp.csproj;x64

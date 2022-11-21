@@ -1,24 +1,41 @@
-﻿namespace EasyServerApp;
+﻿using EasyServerApp.EasyServerDB;
+using EasyServerApp.Pages;
+using System.Collections;
+
+namespace EasyServerApp;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    private EasyServerRepository _easyServerRepository;
+    public EasyServerRepository easyServerRepository { get { return _easyServerRepository; }  }
 
-	public MainPage()
+    private Hashtable requestServiceStates;
+
+    public MainPage()
 	{
 		InitializeComponent();
-	}
+        CreateAPI();
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+        requestServiceStates= new Hashtable();
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+        List<RestaurantTable> tables = easyServerRepository.RestaurantTables;
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        for (int i = 0; i < tables.Count; i++)
+        {
+            requestServiceStates[tables[i].TableId] = false;
+        }
+
+        MainFrame.Content = new Login(requestServiceStates, easyServerRepository);
+    }
+
+    private EasyServerRepository CreateAPI()
+    {
+        if (_easyServerRepository == null)
+        {
+            _easyServerRepository = new EasyServerRepository();
+        }
+
+        return _easyServerRepository;
+    }
 }
 
