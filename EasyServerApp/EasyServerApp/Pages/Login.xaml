@@ -9,7 +9,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="800"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
@@ -129,7 +129,7 @@
                 FontAttributes="Bold"
                 Margin="0, 10, 0, 10"
                 HorizontalOptions="Center"
-                x:Name="Warning" />
+                x:Name="Warning"/>
         </VerticalStackLayout>
         <Button
             Grid.Row="1"

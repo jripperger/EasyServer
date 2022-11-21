@@ -261,7 +261,7 @@ public partial class Tables : ContentView
         Button button = (Button)sender;
         int tableID = int.Parse(button.ClassId);
 
-        ContentPage homePage = (ContentPage)Parent.Parent.Parent;
+        ContentPage homePage = (ContentPage)Parent.Parent.Parent.Parent;
         bool answer = await homePage.DisplayAlert("Warning", "Are you sure you would like to delete Table " + tableID + "?", "Yes", "No");
 
         if (answer == true)

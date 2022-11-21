@@ -38,13 +38,6 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
-        public ServerQueue GetServerQueue(int id)
-        {
-            ServerQueue serverQueue = serverQueues.Where(x => x.Employee.EmployeeId == id).FirstOrDefault();
-
-            return serverQueue;
-        }
-
         public List<Employee> GetEmployeeList()
         {
             using (var context = new EasyServerContext())
@@ -75,14 +68,6 @@ namespace EasyServerApp.EasyServerDB
             {
                 return context.Employee.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
             }              
-        }
-
-        public Employee GetEmployeeByName(string firstName, string lastName)
-        {
-            using (var context = new EasyServerContext())
-            {
-                return context.Employee.Where(x => x.FirstName == firstName && x.LastName == lastName).FirstOrDefault();
-            }
         }
 
         public Employee GetEmployeeByUsername(string username)

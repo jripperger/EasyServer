@@ -5,7 +5,8 @@
     <Grid
         VerticalOptions="Center" 
         HorizontalOptions="Center"
-        x:Name="RequestServiceGrid">
+        x:Name="RequestServiceGrid"
+        WidthRequest="1750">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
