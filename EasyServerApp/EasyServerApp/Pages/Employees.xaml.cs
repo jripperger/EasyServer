@@ -1,7 +1,7 @@
 /*
  * Employees View
  * 
- * View that is displayed in the frame on the Home page. This view
+ * This view is displayed in the frame on the Home page. This view
  * is only available to users with the "Manager" role, and it allows
  * for the manipulation of all employees in the Employee Table.
  * 
@@ -30,8 +30,6 @@ public partial class Employees : ContentView
         this.easyServerRepository = easyServerRepository;
         this.employee = employee;
         this.requestServiceStates = requestServiceStates;
-
-        // Initialize lists
         labels = new List<Label>();
         pickers = new List<Picker>();
         buttons = new List<Button>();
@@ -45,6 +43,7 @@ public partial class Employees : ContentView
      * 
      * Each Row/Column location has an employee label, a dropdown menu with the role
      * options (Manager or server), and a delete employee button
+     * 
      */
     private void GenerateGridContents()
     {
@@ -154,6 +153,7 @@ public partial class Employees : ContentView
     /* 
      * Function to generate the appropriate number of rows based on a hardcoded number of
      * columns and the passed in number of employees
+     * 
      */
     private void GenerateGridLayout(int employeeCount)
     {
@@ -236,7 +236,7 @@ public partial class Employees : ContentView
                 }
             }
 
-            // Re-create the page to reflect deleted employee
+            // Re-create the view to reflect deleted employee
             labels.Clear();
             pickers.Clear();
             buttons.Clear();

@@ -8,6 +8,7 @@
  * is displayed in this navigation bar if the RequestService view is being
  * displayed. This button allows customers to view their table's server's 
  * queue.
+ * 
  */
 
 using EasyServerApp.EasyServerDB;
