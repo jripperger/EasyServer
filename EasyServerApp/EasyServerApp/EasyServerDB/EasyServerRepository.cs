@@ -30,7 +30,7 @@ namespace EasyServerApp.EasyServerDB
         {
             employees = GetEmployeeList();           // Fetch employees from Employee table
             tables = GetTableList();                 // Fetch tables from RestuarantTable table
-            serverQueues = new List<ServerQueue>();  // Instantiate list of server queues
+            serverQueues = new List<ServerQueue>();  // Initialize list of server queues
 
             // Create a server queue for each employee
             for (int i = 0; i < employees.Count; i++)
@@ -111,7 +111,7 @@ namespace EasyServerApp.EasyServerDB
 
                 context.Employee.Add(newEmployee);  // Adds the employee to the Employee table
                 context.SaveChanges();              // Updates the table
-                Employees = GetEmployeeList();      // Update employees list to include new employee
+                Employees = GetEmployeeList();      // Update employees list to include the new employee
 
                 newEmployee = context.Employee.OrderBy(x => x.EmployeeId).LastOrDefault();
 
@@ -120,6 +120,7 @@ namespace EasyServerApp.EasyServerDB
                 ServerQueue serverQueue = new(newEmployee, queue);
                 ServerQueues.Add(serverQueue);
 
+                // Return the inserted employee
                 return newEmployee;
             }
         }
@@ -130,7 +131,7 @@ namespace EasyServerApp.EasyServerDB
             using (var context = new EasyServerContext())
             {
                 // Retrieve the employee based on the passed in employee ID
-                Employee employee = context.Employee.Where(x => x.EmployeeId == employeeID).FirstOrDefault();
+                Employee employee = GetEmployeeById(employeeID);
 
                 if (employee != null)  // If an employee was returned, remove them
                 {
@@ -147,18 +148,19 @@ namespace EasyServerApp.EasyServerDB
                     }
 
                     context.SaveChanges();          // Updates the table
-                    Employees = GetEmployeeList();  // Updates restaurant tables list to exclude the removed employee
+                    Employees = GetEmployeeList();  // Updates employees list to exclude the removed employee
 
                     // Removes the employee's associated server queue from the server queue list
                     ServerQueue serverQueue = ServerQueues.Where(x => x.Employee.EmployeeId == employeeID).FirstOrDefault();
                     ServerQueues.Remove(serverQueue);
                 }
 
+                // Return the deleted employee, possible to return null
                 return employee;
             }
         }
 
-
+        // Function to add a restaurant table to the RestaurantTable table
         public RestaurantTable InsertRestaurantTableRow(string qrCode, int? employeeID)
         {
             using (var context = new EasyServerContext())
@@ -169,33 +171,37 @@ namespace EasyServerApp.EasyServerDB
                     EmployeeId = employeeID
                 };
 
-                context.RestaurantTable.Add(newTable);
-                context.SaveChanges();
-                RestaurantTables = GetTableList();
+                context.RestaurantTable.Add(newTable);  // Adds the table to the RestaurantTable table
+                context.SaveChanges();                  // Updates the table
+                RestaurantTables = GetTableList();      // Updates the restaurant tables list to include the new table
 
-                return context.RestaurantTable.OrderBy(x => x.TableId).LastOrDefault();
+                // Return the inserted table
+                return newTable;
             }
         }
 
+        // Function to delete a restaurant table from the RestaurantTable table
         public RestaurantTable DeleteRestaurantTableRow(int tableID)
         {
             using (var context = new EasyServerContext())
             {
-                RestaurantTable table = context.RestaurantTable.Where(x => x.TableId == tableID).FirstOrDefault();
+                // Retrieve the table based on the passed in table ID
+                RestaurantTable table = GetTableById(tableID);
 
-                if (table != null)
+                if (table != null)  // If a table was returned, remove it
                 {
-                    Task task = new(() => { context.RestaurantTable.Remove(table); });
+                    Task task = new(() => { context.RestaurantTable.Remove(table); });  // Removes the table from the RestaurantTable table
                     task.RunSynchronously();
-                    context.SaveChanges();
-                    RestaurantTables = GetTableList();
+                    context.SaveChanges();              // Updates the table
+                    RestaurantTables = GetTableList();  // Updates the restaurant tables list to exclude the removed table
                 }
-              
+
+                // Return the deleted table, possible to return null
                 return table;
             }
         }
 
-
+        // Function to retrieve a table based on its unique table ID
         public RestaurantTable GetTableById(int id)
         {
             using (var context = new EasyServerContext())
@@ -204,6 +210,7 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
+        // Function to retrieve a table based on its unique QR code
         public RestaurantTable GetTableByQRCode(string qrCode)
         {
             using (var context = new EasyServerContext())
@@ -212,35 +219,39 @@ namespace EasyServerApp.EasyServerDB
             }
         }
 
+        // Function to update a table's server
         public void UpdateTableServer(int tableID, int? employeeID)
         {
             using (var context = new EasyServerContext())
             {
+                // Retrieve the table based on the passed in table ID
                 RestaurantTable table = GetTableById(tableID);
 
-                if (table != null)
+                if (table != null)  // If a table was returned, update its server
                 {             
                     table.EmployeeId = employeeID;
-                    context.RestaurantTable.Update(table);
-                    context.SaveChanges();
-                    RestaurantTables = GetTableList();
+                    context.RestaurantTable.Update(table);  // Modifies the table's employee ID to reflect the passed in employee ID
+                    context.SaveChanges();                  // Updates the table
+                    RestaurantTables = GetTableList();      // Updates the restaurant tables list to reflect the change to the table's employee ID
                 }             
             }
         }
 
+        // Function to update an employee's role
         public void UpdateEmployeeRole(int employeeID, string role)
         {
             using (var context = new EasyServerContext())
             {
+                // Retrieve the employee based on the passed in employee ID
                 Employee employee = GetEmployeeById(employeeID);
 
                 if (employee != null)
                 {
 
                     employee.Role = role;
-                    context.Employee.Update(employee);
-                    context.SaveChanges();
-                    Employees = GetEmployeeList();
+                    context.Employee.Update(employee);  // Modifies the employee's role to reflect the passed in role
+                    context.SaveChanges();              // Updates the table
+                    Employees = GetEmployeeList();      // Updates the employees list to reflect the change to the employee's role
                 }
             }
         }

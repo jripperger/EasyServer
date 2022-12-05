@@ -6,6 +6,7 @@
  * Employee and RestaurantTable tables and their respective 
  * columns) into C# classes and properties.
  */
+#nullable disable
 
 using System;
 using System.Collections.Generic;

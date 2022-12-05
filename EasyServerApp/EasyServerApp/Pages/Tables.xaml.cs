@@ -1,3 +1,9 @@
+/*
+ * Tables View
+ * 
+ * 
+ */
+
 using EasyServerApp.EasyServerDB;
 using Microsoft.Maui.Graphics.Text;
 using System.Collections;

@@ -1,3 +1,9 @@
+/*
+ * Login View
+ * 
+ * 
+ */
+
 using EasyServerApp.EasyServerDB;
 using System.Collections;
 
