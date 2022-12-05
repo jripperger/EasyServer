@@ -11,6 +11,8 @@ public partial class Queue : ContentView
     private List<Button> serviceButtons;
     private Hashtable requestServiceStates;
 
+    public List<Button> ServiceButtons { get { return serviceButtons; } set { serviceButtons = value; } }
+
     public Employee Employee { get { return employee; } }
 
     public Queue(Employee employee, List<ServerQueue> serverQueues, Hashtable requestServiceStates)

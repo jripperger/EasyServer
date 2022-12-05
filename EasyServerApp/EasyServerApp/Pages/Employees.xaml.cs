@@ -163,7 +163,7 @@ public partial class Employees : ContentView
         int employeeID = int.Parse(button.ClassId);
         Employee employee = easyServerRepository.GetEmployeeById(employeeID);
 
-        ContentPage homePage = (ContentPage)Parent.Parent.Parent;
+        ContentPage homePage = (ContentPage)Parent.Parent.Parent.Parent;
         bool answer = await homePage.DisplayAlert("Warning", "Are you sure you would like to delete " + employee.FirstName.Trim() + " " + employee.LastName.Trim() + "?", "Yes", "No");
 
         if (answer == true)

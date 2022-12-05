@@ -153,16 +153,19 @@ public partial class Home : ContentPage
 
     private void ToggleView(object sender, System.EventArgs e)
     {
-        Employee tableServer = easyServerRepository.GetEmployeeById((int)table.EmployeeId);       
-        
+        Employee tableServer = easyServerRepository.GetEmployeeById((int)table.EmployeeId);
+        Pages.Queue queuePage = new(tableServer, easyServerRepository.ServerQueues, requestServiceStates);
+
         if (ToggleViewBtn.Text == "View Queue")
         {
-            HomeFrame.Content = new Pages.Queue(tableServer, easyServerRepository.ServerQueues, requestServiceStates);
+            queuePage.ServiceButtons.ForEach(b => b.IsEnabled = false);
+
+            HomeFrame.Content = queuePage;
             ToggleViewBtn.Text = "Request Service";
         }
         else
         {
-            Pages.Queue queuePage = new(tableServer, easyServerRepository.ServerQueues, requestServiceStates);
+
             HomeFrame.Content = new RequestService(table, queuePage, requestServiceStates, easyServerRepository);
 
             ToggleViewBtn.Text = "View Queue";
