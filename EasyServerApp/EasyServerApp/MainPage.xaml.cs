@@ -15,7 +15,7 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-        // Create a singleton of the pseudo API
+        // Create a singleton of the pseudo API, which will now be passed into each subsequent Page/View
         CreateAPI();
 
         requestServiceStates = new Hashtable();
@@ -28,9 +28,11 @@ public partial class MainPage : ContentPage
             requestServiceStates[tables[i].TableId] = false;
         }
 
+        // Display the Login view on application initialization
         MainFrame.Content = new Login(requestServiceStates, easyServerRepository);
     }
 
+    // Function to create a singleton of the pseudo API
     private EasyServerRepository CreateAPI()
     {
         if (_easyServerRepository == null)
