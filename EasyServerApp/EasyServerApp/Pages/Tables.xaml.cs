@@ -221,10 +221,6 @@ public partial class Tables : ContentView
                 // Assign higher row height for rows that are not for labels (just looks nicer)
                 TablesGrid.RowDefinitions[i].Height = 75;
             }
-            else if (!isManager || i % 3 == 0)
-            {
-                TablesGrid.RowDefinitions[i].Height = 50;
-            }
         }
     }
 
