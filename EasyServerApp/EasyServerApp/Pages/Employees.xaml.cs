@@ -17,10 +17,10 @@ public partial class Employees : ContentView
 {
     private EasyServerRepository easyServerRepository;  // "API"
     private List<Label> labels;                         // List of employee labels
-    private List<Picker> pickers;                       // List of dropdown menus with the role options
+    private List<Picker> pickers;                       // List of dropdown menus with each role as an item
     private List<Button> buttons;                       // List of delete employee buttons
     private Employee employee;                          // The currently logged in employee
-    private Hashtable requestServiceStates;             // States for the request service button of each table, indicating clicked (T) or not clicked (F)
+    private Hashtable requestServiceStates;             // States for whether or not customers are awaiting service at each table
 
     public Employees(Employee employee, Hashtable requestServiceStates, EasyServerRepository easyServerRepository)
 	{
@@ -41,8 +41,8 @@ public partial class Employees : ContentView
     /* 
      * Function to create the grid display for all employees in the Employee table
      * 
-     * Each Row/Column location has an employee label, a dropdown menu with the role
-     * options (Manager or server), and a delete employee button
+     * Each row/column location has an employee label, a dropdown menu with each role
+     * as an option (manager or server), and a delete employee button
      * 
      */
     private void GenerateGridContents()
@@ -50,7 +50,7 @@ public partial class Employees : ContentView
         // Get the employees list from the API property
         List<Employee> employees = easyServerRepository.Employees;
 
-        // Creates the appropriate number of rows
+        // Create the appropriate number of rows
         GenerateGridLayout(employees.Count);
 
         int rowIndex = 0;
@@ -168,7 +168,7 @@ public partial class Employees : ContentView
             EmployeesGrid.AddColumnDefinition(columnDefinition);
         }
 
-        // The number of rows is the number of employees divided by the number of columns multiplied by 3
+        // The number of rows is the number of employees divided by the number of columns multiplied by three
         // to account for a label, dropdown, and a delete button, rounded up
         int rows = (int)Math.Ceiling((double)employeeCount / EmployeesGrid.ColumnDefinitions.Count) * 3;
 
@@ -187,7 +187,7 @@ public partial class Employees : ContentView
     }
 
     
-    // Function to update an employee's role
+    // Function to update employees' roles
     private void SaveServers(object sender, System.EventArgs e)
     { 
         for (int i = 0; i < pickers.Count; i++)
@@ -215,7 +215,7 @@ public partial class Employees : ContentView
         Button button = (Button)sender;
         int employeeID = int.Parse(button.ClassId);
 
-        // Get employee associated with delete button that was clicked based on ID
+        // Get the employee with matching ID of the clicked delete button
         Employee employee = easyServerRepository.GetEmployeeById(employeeID);
 
         // Display an alert to warn about deletion

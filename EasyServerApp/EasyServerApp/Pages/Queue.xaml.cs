@@ -18,10 +18,9 @@ public partial class Queue : ContentView
     private List<ServerQueue> serverQueues;  // A list of the servers' server queues
     private ServerQueue serverQueue;         // The currently logged in employee's server queue
     private List<Button> serviceButtons;     // A list of the buttons for tables awaiting service
-    private Hashtable requestServiceStates;  // States for the request service button of each table, indicating clicked (T) or not clicked (F)
+    private Hashtable requestServiceStates;  // States for whether or not customers are awaiting service at each table
 
     public List<Button> ServiceButtons { get { return serviceButtons; } set { serviceButtons = value; } }
-
     public Employee Employee { get { return employee; } }
 
     public Queue(Employee employee, List<ServerQueue> serverQueues, Hashtable requestServiceStates)

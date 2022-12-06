@@ -20,7 +20,7 @@ public partial class Home : ContentPage
 {
     private EasyServerRepository easyServerRepository;  // "API"
     private Employee employee;                          // The currently logged in employee
-    private Hashtable requestServiceStates;             // States for the request service button of each table, indicating clicked (T) or not clicked (F)
+    private Hashtable requestServiceStates;             // States for whether or not customers are awaiting service at each table
     private RestaurantTable table;                      // The currently loggin in table - if a table was logged in to
     private bool isTables;                              // Boolean to determine which page is being displayed after login
     private DateTime TOD;                               // Current TOD

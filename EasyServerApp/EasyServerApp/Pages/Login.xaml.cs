@@ -15,7 +15,7 @@ namespace EasyServerApp.Pages;
 public partial class Login : ContentView
 {
     private EasyServerRepository easyServerRepository;  // "API"
-    private Hashtable requestServiceStates;             // States for the request service button of each table, indicating clicked (T) or not clicked (F)
+    private Hashtable requestServiceStates;             // States for whether or not customers are awaiting service at each table
 
     public Login(Hashtable requestServiceStates, EasyServerRepository easyServerRepository)
     {
