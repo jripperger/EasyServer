@@ -4,7 +4,7 @@
 This application is intended to simplify the job of restaurant servers by implementing a queue to organize customer service.
 
 EasyServer requires the installation of .NET MAUI to one's system; this framework can be downloaded by adding the corresponding package 
-to one's Visual Studio installation via the Visual Studio installer. Currently, the application runs exclusively on Windows machines, but other platforms 
+to one's Visual Studio installation via the Visual Studio Installer. Currently, the application runs exclusively on Windows machines, but other platforms 
 will likely be compatible in the future (i.e. Mac, iOS, and Android). Since this app has just been implemented locally, it is only executable 
 using an IDE; during this application's development process, Visual Studio 2022 Community was used. Line-by-line documentation is provided in 
 each of the files that I developed. Some directories—such as "Connected Services", "Dependencies", "Platforms", "Properties", and "Resources"—
